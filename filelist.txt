@@ -1,17 +1,49 @@
-2TB_Nvme2 볼륨에 대한 폴더 경로의 목록입니다.
-볼륨 일련 번호가 000000DC 6657:F8FC입니다.
-H:.
+폴더 PATH의 목록입니다.
+볼륨 일련 번호는 ECE3-C6D1입니다.
+C:.
+│  .gitignore
 │  filelist.txt
 │  make_tree.bat
-│  TestMFC.sln
 │  
+├─bin
+│  └─Debug x64
+│          protobufferD.exe
+│          protobufferD.pdb
+│          
+├─obj
+│  └─protobuffer
+│      └─Debug x64
+│          │  pch.obj
+│          │  protobufferD.exe.recipe
+│          │  protobufferD.ilk
+│          │  protobufferD.pch
+│          │  TestMFC.log
+│          │  TestMFC.obj
+│          │  TestMFC.res
+│          │  TestMFCDlg.obj
+│          │  vc142.idb
+│          │  vc142.pdb
+│          │  vcpkg.applocal.log
+│          │  
+│          └─protobuffer.tlog
+│                  CL.command.1.tlog
+│                  CL.read.1.tlog
+│                  CL.write.1.tlog
+│                  link.command.1.tlog
+│                  link.read.1.tlog
+│                  link.write.1.tlog
+│                  protobuffer.lastbuildstate
+│                  protobuffer.write.1u.tlog
+│                  rc.command.1.tlog
+│                  rc.read.1.tlog
+│                  rc.write.1.tlog
+│                  
 ├─TestMFC
 │  │  framework.h
 │  │  pch.cpp
 │  │  pch.h
 │  │  resource.h
 │  │  targetver.h
-│  │  TestMFC.aps
 │  │  TestMFC.cpp
 │  │  TestMFC.h
 │  │  TestMFC.rc
@@ -21,34 +53,14 @@ H:.
 │  │  TestMFCDlg.cpp
 │  │  TestMFCDlg.h
 │  │  
-│  ├─Debug
-│  │  │  pch.obj
-│  │  │  TestMFC.exe.recipe
-│  │  │  TestMFC.ilk
-│  │  │  TestMFC.log
-│  │  │  TestMFC.obj
-│  │  │  TestMFC.pch
-│  │  │  TestMFC.res
-│  │  │  TestMFCDlg.obj
-│  │  │  vc142.idb
-│  │  │  vc142.pdb
-│  │  │  
-│  │  └─TestMFC.tlog
-│  │          CL.command.1.tlog
-│  │          CL.read.1.tlog
-│  │          CL.write.1.tlog
-│  │          link.command.1.tlog
-│  │          link.read.1.tlog
-│  │          link.write.1.tlog
-│  │          rc.command.1.tlog
-│  │          rc.read.1.tlog
-│  │          rc.write.1.tlog
-│  │          TestMFC.lastbuildstate
-│  │          
 │  └─res
 │          TestMFC.ico
 │          TestMFC.rc2
 │          
+├─workspace
+│      protobufferMFC.sln
+│      
 └─참고자료
         클로드 작업 지시 프롬프트.md
+        프로토 버퍼 준비.md
         
