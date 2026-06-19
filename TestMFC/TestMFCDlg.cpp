@@ -3,6 +3,7 @@
 #include "TestMFC.h"
 #include "TestMFCDlg.h"
 #include "afxdialogex.h"
+#include "person.pb.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -72,4 +73,47 @@ HCURSOR CTestMFCDlg::OnQueryDragIcon()
 
 void CTestMFCDlg::OnBnClickedButton1()
 {
+    // -------------------------------------------------------
+    // 1단계: Person 메시지 객체 생성 및 필드 설정
+    // -------------------------------------------------------
+    tutorial::Person oPerson;
+    oPerson.set_name("TestUser");
+    oPerson.set_id(1001);
+    oPerson.set_email("test@example.com");
+
+    // -------------------------------------------------------
+    // 2단계: 바이너리 직렬화 (Serialize)
+    // -------------------------------------------------------
+    std::string strSerializedData;
+    if (!oPerson.SerializeToString(&strSerializedData))
+    {
+        AfxMessageBox(_T("직렬화(SerializeToString) 실패"));
+        return;
+    }
+
+    // -------------------------------------------------------
+    // 3단계: 바이너리 역직렬화 (Parse)
+    // -------------------------------------------------------
+    tutorial::Person oParsedPerson;
+    if (!oParsedPerson.ParseFromString(strSerializedData))
+    {
+        AfxMessageBox(_T("역직렬화(ParseFromString) 실패"));
+        return;
+    }
+
+    // -------------------------------------------------------
+    // 4단계: 결과 출력
+    // (%S : Unicode CString::Format 에서 char* 를 wide 로 변환)
+    // -------------------------------------------------------
+    CString strMsg;
+    strMsg.Format(
+        _T("== Proto Buffer 직렬화/역직렬화 성공 ==\n")
+        _T("이름  : %S\n")
+        _T("ID    : %d\n")
+        _T("이메일: %S"),
+        oParsedPerson.name().c_str(),
+        oParsedPerson.id(),
+        oParsedPerson.email().c_str()
+    );
+    AfxMessageBox(strMsg);
 }
