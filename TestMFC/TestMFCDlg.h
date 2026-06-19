@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+
 class CTestMFCDlg : public CDialogEx
 {
 public:
@@ -22,4 +23,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButton1();
+
+/*	void SaveProtobufData();
+	void LoadProtobufData();*/	
 };

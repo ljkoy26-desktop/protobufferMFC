@@ -1,17 +1,66 @@
-2TB_Nvme2 볼륨에 대한 폴더 경로의 목록입니다.
-볼륨 일련 번호가 000000DC 6657:F8FC입니다.
-H:.
+폴더 PATH의 목록입니다.
+볼륨 일련 번호는 ECE3-C6D1입니다.
+C:.
+│  .gitignore
 │  filelist.txt
 │  make_tree.bat
-│  TestMFC.sln
 │  
+├─.claude
+│      settings.local.json
+│      
+├─bin
+│  └─Debug x64
+│          protobufferD.pdb
+│          
+├─obj
+│  └─protobuffer
+│      └─Debug x64
+│          │  pch.obj
+│          │  person.pb.obj
+│          │  protobufferD.exe.recipe
+│          │  protobufferD.pch
+│          │  TestMFC.log
+│          │  TestMFC.obj
+│          │  TestMFC.res
+│          │  TestMFCDlg.obj
+│          │  vc142.idb
+│          │  vc142.pdb
+│          │  vcpkg.applocal.log
+│          │  
+│          └─protobuffer.tlog
+│                  CL.command.1.tlog
+│                  CL.read.1.tlog
+│                  CL.write.1.tlog
+│                  link.29216-cvtres.read.1.tlog
+│                  link.29216-cvtres.write.1.tlog
+│                  link.29216-mt.read.1.tlog
+│                  link.29216-mt.write.1.tlog
+│                  link.29216-rc.read.1.tlog
+│                  link.29216-rc.write.1.tlog
+│                  link.29216.read.1.tlog
+│                  link.29216.write.1.tlog
+│                  link.command.1.tlog
+│                  link.read.1.tlog
+│                  link.write.1.tlog
+│                  protobuffer.lastbuildstate
+│                  protobuffer.write.1u.tlog
+│                  rc.command.1.tlog
+│                  rc.read.1.tlog
+│                  rc.write.1.tlog
+│                  unsuccessfulbuild
+│                  
 ├─TestMFC
+│  │  filter_data.pb.cc
+│  │  filter_data.pb.h
+│  │  filter_data.proto
 │  │  framework.h
 │  │  pch.cpp
 │  │  pch.h
+│  │  person.pb.cc
+│  │  person.pb.h
+│  │  person.proto
 │  │  resource.h
 │  │  targetver.h
-│  │  TestMFC.aps
 │  │  TestMFC.cpp
 │  │  TestMFC.h
 │  │  TestMFC.rc
@@ -21,34 +70,15 @@ H:.
 │  │  TestMFCDlg.cpp
 │  │  TestMFCDlg.h
 │  │  
-│  ├─Debug
-│  │  │  pch.obj
-│  │  │  TestMFC.exe.recipe
-│  │  │  TestMFC.ilk
-│  │  │  TestMFC.log
-│  │  │  TestMFC.obj
-│  │  │  TestMFC.pch
-│  │  │  TestMFC.res
-│  │  │  TestMFCDlg.obj
-│  │  │  vc142.idb
-│  │  │  vc142.pdb
-│  │  │  
-│  │  └─TestMFC.tlog
-│  │          CL.command.1.tlog
-│  │          CL.read.1.tlog
-│  │          CL.write.1.tlog
-│  │          link.command.1.tlog
-│  │          link.read.1.tlog
-│  │          link.write.1.tlog
-│  │          rc.command.1.tlog
-│  │          rc.read.1.tlog
-│  │          rc.write.1.tlog
-│  │          TestMFC.lastbuildstate
-│  │          
 │  └─res
 │          TestMFC.ico
 │          TestMFC.rc2
 │          
+├─workspace
+│      protobufferMFC.sln
+│      
 └─참고자료
+        명령어 히스토리.md
         클로드 작업 지시 프롬프트.md
+        프로토 버퍼 준비.md
         

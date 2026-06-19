@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package my_msg;
+
+// 필터 상세 내용 (Include/Exclude 배열)
+message FilterItem {
+    repeated string include_filters = 1;  // repeated는 std::vector와 같습니다.
+    repeated string exclude_filters = 2;
+}
+
+// 전체 설정 (Key: string, Value: FilterItem 구조체)
+message FilterConfig {
+    map<string, FilterItem> filter_map = 1; // std::map과 같습니다.
+}

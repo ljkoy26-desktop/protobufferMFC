@@ -1,9 +1,17 @@
-﻿#include "pch.h"
+﻿
+#include "pch.h"
 #include "framework.h"
 #include "TestMFC.h"
 #include "TestMFCDlg.h"
 #include "afxdialogex.h"
 #include "person.pb.h"
+#include "filter_data.pb.h"
+#include <fstream>
+
+
+
+
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -117,3 +125,49 @@ void CTestMFCDlg::OnBnClickedButton1()
     );
     AfxMessageBox(strMsg);
 }
+
+
+// 1. 데이터 파일로 안전하게 저장하기 (Serialize)
+//void CTestMFCDlg::SaveProtobufData()
+//{
+//    my_msg::FilterConfig oConfig;
+//
+//    // "FilterList1" 이라는 키에 데이터 세팅
+//    auto& oItem = (*oConfig.mutable_filter_map())["FilterList1"];
+//    oItem.add_include_filters("EMP");
+//    oItem.add_include_filters("EMP100");
+//    oItem.add_exclude_filters("MS");
+//
+//    // 바이너리 파일로 출력
+//    std::ofstream oOutput("C:\\Data\\filters.bin", std::ios::out | std::ios::binary);
+//    if (oConfig.SerializeToOstream(&oOutput))
+//    {
+//        TRACE(_T("Protobuf 저장 성공!\n"));
+//    }
+//}
+//
+//// 2. 파일에서 데이터 읽어와 복구하기 (Parse)
+//void CTestMFCDlg::LoadProtobufData()
+//{
+//    my_msg::FilterConfig oConfig;
+//    std::ifstream oInput("C:\\Data\\filters.bin", std::ios::in | std::ios::binary);
+//
+//    if (oConfig.ParseFromIstream(&oInput))
+//    {
+//        auto& oFilterMap = oConfig.filter_map();
+//
+//        // 데이터가 있는지 확인하고 꺼내 쓰기
+//        if (oFilterMap.contains("FilterList1"))
+//        {
+//            const auto& oItem = oFilterMap.at("FilterList1");
+//
+//            // 꺼내서 CString 변환 후 리스트박스 등에 추가
+//            for (int i = 0; i < oItem.include_filters_size(); ++i)
+//            {
+//                CString strInc(oItem.include_filters(i).c_str());
+//                // m_listBox.AddString(strInc);
+//            }
+//        }
+//    }
+//}
+//
