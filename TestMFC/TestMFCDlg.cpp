@@ -6,6 +6,8 @@
 #include "afxdialogex.h"
 #include "person.pb.h"
 #include "filter_data.pb.h"
+#include "ReceiverDlg.h"
+#include "CopyDataDefs.h"
 #include <fstream>
 
 
@@ -19,6 +21,7 @@
 
 CTestMFCDlg::CTestMFCDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_TESTMFC_DIALOG, pParent)
+	, m_pReceiverDlg(nullptr)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -32,7 +35,9 @@ BEGIN_MESSAGE_MAP(CTestMFCDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CTestMFCDlg::OnBnClickedButton1)
+	ON_WM_COPYDATA()
+	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_BUTTON_SEND, &CTestMFCDlg::OnBnClickedButtonSend)
 END_MESSAGE_MAP()
 
 BOOL CTestMFCDlg::OnInitDialog()
@@ -41,6 +46,43 @@ BOOL CTestMFCDlg::OnInitDialog()
 
 	SetIcon(m_hIcon, TRUE);
 	SetIcon(m_hIcon, FALSE);
+
+	// 윈도우 타이틀 설정 — ReceiverDlg 에서 FindWindow(NULL, "SendApp") 으로 찾습니다.
+	SetWindowText(_T("SendApp"));
+
+	// ES_MULTILINE 은 창 생성 시에만 적용 가능 → 기존 컨트롤 파괴 후 재생성
+	CEdit* pOldEdit = static_cast<CEdit*>(GetDlgItem(IDC_EDIT_RECV));
+	if (pOldEdit != nullptr)
+	{
+		CRect rcEdit;
+		pOldEdit->GetWindowRect(&rcEdit);
+		ScreenToClient(&rcEdit);
+		pOldEdit->DestroyWindow();
+
+		m_editRecv.CreateEx(
+			WS_EX_CLIENTEDGE, _T("EDIT"), nullptr,
+			WS_CHILD | WS_VISIBLE | WS_VSCROLL
+			| ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | ES_LEFT,
+			rcEdit,
+			this,
+			IDC_EDIT_RECV
+		);
+	}
+
+	// ReceiverDlg 모달리스 대화상자 생성 (같은 리소스 IDD_TESTMFC_DIALOG 재사용)
+	m_pReceiverDlg = new CReceiverDlg(nullptr);
+	m_pReceiverDlg->Create(IDD_TESTMFC_DIALOG, nullptr);
+
+	// 현재 대화상자 오른쪽에 나란히 배치
+	CRect rcThis;
+	GetWindowRect(&rcThis);
+	m_pReceiverDlg->SetWindowPos(
+		nullptr,
+		rcThis.right + 10, rcThis.top,
+		0, 0,
+		SWP_NOSIZE | SWP_NOZORDER
+	);
+	m_pReceiverDlg->ShowWindow(SW_SHOW);
 
 	return TRUE;
 }
@@ -79,7 +121,61 @@ HCURSOR CTestMFCDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CTestMFCDlg::OnBnClickedButton1()
+
+// -------------------------------------------------------
+// WM_COPYDATA 수신 처리
+// -------------------------------------------------------
+BOOL CTestMFCDlg::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
+{
+	// 데이터 타입 식별자 검사
+	if (pCopyDataStruct->dwData != COPYDATA_PERSON_PROTO)
+	{
+		return FALSE;
+	}
+
+	// protobuf 역직렬화
+	tutorial::Person oPerson;
+	if (!oPerson.ParseFromArray(pCopyDataStruct->lpData, pCopyDataStruct->cbData))
+	{
+		SetDlgItemText(IDC_EDIT_RECV, _T("[오류] protobuf 역직렬화 실패"));
+		return FALSE;
+	}
+
+	// IDC_EDIT_RECV 에 수신 내용 표시
+	CString strDisplay;
+	strDisplay.Format(
+		_T("== 수신 완료 ==\r\n")
+		_T("이름  : %S\r\n")
+		_T("ID    : %d\r\n")
+		_T("이메일: %S\r\n")
+		_T("크기  : %d bytes"),
+		oPerson.name().c_str(),
+		oPerson.id(),
+		oPerson.email().c_str(),
+		pCopyDataStruct->cbData
+	);
+	SetDlgItemText(IDC_EDIT_RECV, strDisplay);
+
+	return TRUE;  // 처리 완료 → 송신 측 SendMessage 반환값 = 1
+}
+
+
+// -------------------------------------------------------
+// WM_DESTROY — ReceiverDlg 수명 관리
+// -------------------------------------------------------
+void CTestMFCDlg::OnDestroy()
+{
+	if (m_pReceiverDlg != nullptr)
+	{
+		m_pReceiverDlg->DestroyWindow();
+		delete m_pReceiverDlg;
+		m_pReceiverDlg = nullptr;
+	}
+	CDialogEx::OnDestroy();
+}
+
+
+void CTestMFCDlg::OnBnClickedButtonSend()
 {
     // -------------------------------------------------------
     // 1단계: Person 메시지 객체 생성 및 필드 설정
@@ -100,29 +196,57 @@ void CTestMFCDlg::OnBnClickedButton1()
     }
 
     // -------------------------------------------------------
-    // 3단계: 바이너리 역직렬화 (Parse)
+    // 3단계: 수신 윈도우 검색
+    // FindWindow(클래스명, 윈도우타이틀) — 수신 프로그램에 맞게 변경하세요.
     // -------------------------------------------------------
-    tutorial::Person oParsedPerson;
-    if (!oParsedPerson.ParseFromString(strSerializedData))
+    HWND hTargetWnd = ::FindWindow(NULL, _T("ReceiverApp"));
+    if (hTargetWnd == NULL)
     {
-        AfxMessageBox(_T("역직렬화(ParseFromString) 실패"));
+        AfxMessageBox(_T("수신 프로그램 윈도우를 찾을 수 없습니다.\n윈도우 타이틀을 확인하세요."));
         return;
     }
 
     // -------------------------------------------------------
-    // 4단계: 결과 출력
-    // (%S : Unicode CString::Format 에서 char* 를 wide 로 변환)
+    // 4단계: COPYDATASTRUCT 구성
+    // -------------------------------------------------------
+    COPYDATASTRUCT oCds;
+    oCds.dwData = COPYDATA_PERSON_PROTO;                              // 데이터 타입 식별자
+    oCds.cbData = static_cast<DWORD>(strSerializedData.size());      // 데이터 크기 (바이트)
+    oCds.lpData = const_cast<char*>(strSerializedData.data());       // 직렬화된 바이너리 포인터
+
+    // -------------------------------------------------------
+    // 5단계: WM_COPYDATA 전송
+    // wParam : 송신 윈도우 핸들, lParam : COPYDATASTRUCT 포인터
+    // -------------------------------------------------------
+    LRESULT lResult = ::SendMessage(
+        hTargetWnd,
+        WM_COPYDATA,
+        reinterpret_cast<WPARAM>(GetSafeHwnd()),
+        reinterpret_cast<LPARAM>(&oCds)
+    );
+
+    // -------------------------------------------------------
+    // 6단계: 결과 출력
     // -------------------------------------------------------
     CString strMsg;
-    strMsg.Format(
-        _T("== Proto Buffer 직렬화/역직렬화 성공 ==\n")
-        _T("이름  : %S\n")
-        _T("ID    : %d\n")
-        _T("이메일: %S"),
-        oParsedPerson.name().c_str(),
-        oParsedPerson.id(),
-        oParsedPerson.email().c_str()
-    );
+    if (lResult)
+    {
+        strMsg.Format(
+            _T("WM_COPYDATA 전송 성공\n")
+            _T("이름  : %S\n")
+            _T("ID    : %d\n")
+            _T("이메일: %S\n")
+            _T("크기  : %d bytes"),
+            oPerson.name().c_str(),
+            oPerson.id(),
+            oPerson.email().c_str(),
+            oCds.cbData
+        );
+    }
+    else
+    {
+        strMsg = _T("WM_COPYDATA 전송 실패\n수신 프로그램이 메시지를 처리하지 않았습니다.");
+    }
     AfxMessageBox(strMsg);
 }
 

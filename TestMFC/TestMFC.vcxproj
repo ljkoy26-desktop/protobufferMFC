@@ -208,6 +208,8 @@
     <ClInclude Include="person.pb.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="CopyDataDefs.h" />
+    <ClInclude Include="ReceiverDlg.h" />
     <ClInclude Include="TestMFC.h" />
     <ClInclude Include="TestMFCDlg.h" />
   </ItemGroup>
@@ -224,6 +226,7 @@
     <ClCompile Include="person.pb.cc">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ReceiverDlg.cpp" />
     <ClCompile Include="TestMFC.cpp" />
     <ClCompile Include="TestMFCDlg.cpp" />
   </ItemGroup>
