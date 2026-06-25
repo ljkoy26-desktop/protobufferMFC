@@ -10,18 +10,24 @@ C:.
 ¦¢      
 ¦§¦¡bin
 ¦¢  ¦¦¦¡Debug x64
+¦¢          abseil_dll.dll
+¦¢          libprotobufd.dll
+¦¢          protobufferD.exe
 ¦¢          protobufferD.pdb
 ¦¢          
 ¦§¦¡obj
 ¦¢  ¦¦¦¡protobuffer
 ¦¢      ¦¦¦¡Debug x64
+¦¢          ¦¢  filter_data.pb.obj
 ¦¢          ¦¢  pch.obj
 ¦¢          ¦¢  person.pb.obj
 ¦¢          ¦¢  protobufferD.exe.recipe
+¦¢          ¦¢  protobufferD.ilk
 ¦¢          ¦¢  protobufferD.pch
 ¦¢          ¦¢  TestMFC.log
 ¦¢          ¦¢  TestMFC.obj
 ¦¢          ¦¢  TestMFC.res
+¦¢          ¦¢  TestMFC.vcxproj.FileListAbsolute.txt
 ¦¢          ¦¢  TestMFCDlg.obj
 ¦¢          ¦¢  vc142.idb
 ¦¢          ¦¢  vc142.pdb
@@ -31,14 +37,6 @@ C:.
 ¦¢                  CL.command.1.tlog
 ¦¢                  CL.read.1.tlog
 ¦¢                  CL.write.1.tlog
-¦¢                  link.29216-cvtres.read.1.tlog
-¦¢                  link.29216-cvtres.write.1.tlog
-¦¢                  link.29216-mt.read.1.tlog
-¦¢                  link.29216-mt.write.1.tlog
-¦¢                  link.29216-rc.read.1.tlog
-¦¢                  link.29216-rc.write.1.tlog
-¦¢                  link.29216.read.1.tlog
-¦¢                  link.29216.write.1.tlog
 ¦¢                  link.command.1.tlog
 ¦¢                  link.read.1.tlog
 ¦¢                  link.write.1.tlog
@@ -47,7 +45,6 @@ C:.
 ¦¢                  rc.command.1.tlog
 ¦¢                  rc.read.1.tlog
 ¦¢                  rc.write.1.tlog
-¦¢                  unsuccessfulbuild
 ¦¢                  
 ¦§¦¡TestMFC
 ¦¢  ¦¢  filter_data.pb.cc
