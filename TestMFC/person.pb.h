@@ -214,6 +214,7 @@ class Person final : public ::google::protobuf::Message
   enum : int {
     kNameFieldNumber = 1,
     kEmailFieldNumber = 3,
+    kEmail2FieldNumber = 4,
     kIdFieldNumber = 2,
   };
   // string name = 1;
@@ -246,6 +247,21 @@ class Person final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_email();
 
   public:
+  // string email2 = 4;
+  void clear_email2() ;
+  const ::std::string& email2() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_email2(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_email2();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_email2();
+  void set_allocated_email2(::std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const ::std::string& _internal_email2() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_email2(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_email2();
+
+  public:
   // int32 id = 2;
   void clear_id() ;
   ::int32_t id() const;
@@ -260,8 +276,8 @@ class Person final : public ::google::protobuf::Message
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<2, 3,
-                                   0, 33,
+  static const ::google::protobuf::internal::TcParseTable<2, 4,
+                                   0, 39,
                                    2>
       _table_;
 
@@ -284,6 +300,7 @@ class Person final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr name_;
     ::google::protobuf::internal::ArenaStringPtr email_;
+    ::google::protobuf::internal::ArenaStringPtr email2_;
     ::int32_t id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -379,7 +396,7 @@ inline void Person::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.id_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+                  0x00000008U);
 }
 inline ::int32_t Person::id() const {
   // @@protoc_insertion_point(field_get:tutorial.Person.id)
@@ -387,7 +404,7 @@ inline ::int32_t Person::id() const {
 }
 inline void Person::set_id(::int32_t value) {
   _internal_set_id(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
   // @@protoc_insertion_point(field_set:tutorial.Person.id)
 }
 inline ::int32_t Person::_internal_id() const {
@@ -462,6 +479,71 @@ inline void Person::set_allocated_email(::std::string* PROTOBUF_NULLABLE value) 
     _impl_.email_.Set("", GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:tutorial.Person.email)
+}
+
+// string email2 = 4;
+inline void Person::clear_email2() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.email2_.ClearToEmpty();
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000004U);
+}
+inline const ::std::string& Person::email2() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:tutorial.Person.email2)
+  return _internal_email2();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void Person::set_email2(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  _impl_.email2_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:tutorial.Person.email2)
+}
+inline ::std::string* PROTOBUF_NONNULL Person::mutable_email2()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  ::std::string* _s = _internal_mutable_email2();
+  // @@protoc_insertion_point(field_mutable:tutorial.Person.email2)
+  return _s;
+}
+inline const ::std::string& Person::_internal_email2() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.email2_.Get();
+}
+inline void Person::_internal_set_email2(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.email2_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL Person::_internal_mutable_email2() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.email2_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE Person::release_email2() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:tutorial.Person.email2)
+  if (!CheckHasBit(_impl_._has_bits_[0], 0x00000004U)) {
+    return nullptr;
+  }
+  ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
+  auto* released = _impl_.email2_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.email2_.Set("", GetArena());
+  }
+  return released;
+}
+inline void Person::set_allocated_email2(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
+  }
+  _impl_.email2_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.email2_.IsDefault()) {
+    _impl_.email2_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:tutorial.Person.email2)
 }
 
 #ifdef __GNUC__

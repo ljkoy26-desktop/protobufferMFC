@@ -35,6 +35,9 @@ inline constexpr Person::Impl_::Impl_(
         email_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
+        email2_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
         id_{0} {}
 
 template <typename>
@@ -66,13 +69,15 @@ const ::uint32_t
         protodesc_cold) = {
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::tutorial::Person, _impl_._has_bits_),
-        6, // hasbit index offset
+        7, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::tutorial::Person, _impl_.name_),
         PROTOBUF_FIELD_OFFSET(::tutorial::Person, _impl_.id_),
         PROTOBUF_FIELD_OFFSET(::tutorial::Person, _impl_.email_),
+        PROTOBUF_FIELD_OFFSET(::tutorial::Person, _impl_.email2_),
         0,
-        2,
+        3,
         1,
+        2,
 };
 
 static const ::_pbi::MigrationSchema
@@ -84,15 +89,15 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 };
 const char descriptor_table_protodef_person_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\014person.proto\022\010tutorial\"1\n\006Person\022\014\n\004na"
-    "me\030\001 \001(\t\022\n\n\002id\030\002 \001(\005\022\r\n\005email\030\003 \001(\tb\006pro"
-    "to3"
+    "\n\014person.proto\022\010tutorial\"A\n\006Person\022\014\n\004na"
+    "me\030\001 \001(\t\022\n\n\002id\030\002 \001(\005\022\r\n\005email\030\003 \001(\t\022\016\n\006e"
+    "mail2\030\004 \001(\tb\006proto3"
 };
 static ::absl::once_flag descriptor_table_person_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_person_2eproto = {
     false,
     false,
-    83,
+    99,
     descriptor_table_protodef_person_2eproto,
     "person.proto",
     &descriptor_table_person_2eproto_once,
@@ -132,7 +137,8 @@ PROTOBUF_NDEBUG_INLINE Person::Impl_::Impl_(
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         name_(arena, from.name_),
-        email_(arena, from.email_) {}
+        email_(arena, from.email_),
+        email2_(arena, from.email2_) {}
 
 Person::Person(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
@@ -156,7 +162,8 @@ PROTOBUF_NDEBUG_INLINE Person::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
       : _cached_size_{0},
         name_(arena),
-        email_(arena) {}
+        email_(arena),
+        email2_(arena) {}
 
 inline void Person::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -175,6 +182,7 @@ inline void Person::SharedDtor(MessageLite& self) {
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.name_.Destroy();
   this_._impl_.email_.Destroy();
+  this_._impl_.email2_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -221,16 +229,16 @@ Person::GetClassData() const {
   return Person_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 33, 2>
+const ::_pbi::TcParseTable<2, 4, 0, 39, 2>
 Person::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(Person, _impl_._has_bits_),
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    4,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     Person_class_data_.base(),
@@ -240,14 +248,17 @@ Person::_table_ = {
     ::_pbi::TcParser::GetTable<::tutorial::Person>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // string email2 = 4;
+    {::_pbi::TcParser::FastUS1,
+     {34, 2, 0,
+      PROTOBUF_FIELD_OFFSET(Person, _impl_.email2_)}},
     // string name = 1;
     {::_pbi::TcParser::FastUS1,
      {10, 0, 0,
       PROTOBUF_FIELD_OFFSET(Person, _impl_.name_)}},
     // int32 id = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Person, _impl_.id_), 2>(),
-     {16, 2, 0,
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Person, _impl_.id_), 3>(),
+     {16, 3, 0,
       PROTOBUF_FIELD_OFFSET(Person, _impl_.id_)}},
     // string email = 3;
     {::_pbi::TcParser::FastUS1,
@@ -259,16 +270,19 @@ Person::_table_ = {
     // string name = 1;
     {PROTOBUF_FIELD_OFFSET(Person, _impl_.name_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // int32 id = 2;
-    {PROTOBUF_FIELD_OFFSET(Person, _impl_.id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    {PROTOBUF_FIELD_OFFSET(Person, _impl_.id_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
     // string email = 3;
     {PROTOBUF_FIELD_OFFSET(Person, _impl_.email_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string email2 = 4;
+    {PROTOBUF_FIELD_OFFSET(Person, _impl_.email2_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\17\4\0\5\0\0\0\0"
+    "\17\4\0\5\6\0\0\0"
     "tutorial.Person"
     "name"
     "email"
+    "email2"
   }},
 };
 PROTOBUF_NOINLINE void Person::Clear() {
@@ -279,12 +293,15 @@ PROTOBUF_NOINLINE void Person::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (BatchCheckHasBit(cached_has_bits, 0x00000003U)) {
+  if (BatchCheckHasBit(cached_has_bits, 0x00000007U)) {
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
       _impl_.name_.ClearNonDefaultToEmpty();
     }
     if (CheckHasBit(cached_has_bits, 0x00000002U)) {
       _impl_.email_.ClearNonDefaultToEmpty();
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+      _impl_.email2_.ClearNonDefaultToEmpty();
     }
   }
   _impl_.id_ = 0;
@@ -322,7 +339,7 @@ PROTOBUF_NOINLINE void Person::Clear() {
   }
 
   // int32 id = 2;
-  if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+  if (CheckHasBit(cached_has_bits, 0x00000008U)) {
     if (this_._internal_id() != 0) {
       target =
           ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<2>(
@@ -337,6 +354,16 @@ PROTOBUF_NOINLINE void Person::Clear() {
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
           _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "tutorial.Person.email");
       target = stream->WriteStringMaybeAliased(3, _s, target);
+    }
+  }
+
+  // string email2 = 4;
+  if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+    if (!this_._internal_email2().empty()) {
+      const ::std::string& _s = this_._internal_email2();
+      ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "tutorial.Person.email2");
+      target = stream->WriteStringMaybeAliased(4, _s, target);
     }
   }
 
@@ -365,7 +392,7 @@ PROTOBUF_NOINLINE void Person::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if (BatchCheckHasBit(cached_has_bits, 0x00000007U)) {
+  if (BatchCheckHasBit(cached_has_bits, 0x0000000fU)) {
     // string name = 1;
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
       if (!this_._internal_name().empty()) {
@@ -380,8 +407,15 @@ PROTOBUF_NOINLINE void Person::Clear() {
                                         this_._internal_email());
       }
     }
-    // int32 id = 2;
+    // string email2 = 4;
     if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+      if (!this_._internal_email2().empty()) {
+        total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                        this_._internal_email2());
+      }
+    }
+    // int32 id = 2;
+    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
       if (this_._internal_id() != 0) {
         total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
             this_._internal_id());
@@ -406,7 +440,7 @@ void Person::MergeImpl(::google::protobuf::MessageLite& to_msg,
   (void)cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (BatchCheckHasBit(cached_has_bits, 0x00000007U)) {
+  if (BatchCheckHasBit(cached_has_bits, 0x0000000fU)) {
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
       if (!from._internal_name().empty()) {
         _this->_internal_set_name(from._internal_name());
@@ -426,6 +460,15 @@ void Person::MergeImpl(::google::protobuf::MessageLite& to_msg,
       }
     }
     if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+      if (!from._internal_email2().empty()) {
+        _this->_internal_set_email2(from._internal_email2());
+      } else {
+        if (_this->_impl_.email2_.IsDefault()) {
+          _this->_internal_set_email2("");
+        }
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
       if (from._internal_id() != 0) {
         _this->_impl_.id_ = from._impl_.id_;
       }
@@ -452,6 +495,7 @@ void Person::InternalSwap(Person* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, &other->_impl_.name_, arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.email_, &other->_impl_.email_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.email2_, &other->_impl_.email2_, arena);
   swap(_impl_.id_, other->_impl_.id_);
 }
 

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="proto">
+      <UniqueIdentifier>{a2ba6d70-02ef-4588-a00b-4712583dd468}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestMFC.h">
@@ -74,6 +77,12 @@
   <ItemGroup>
     <None Include="res\TestMFC.rc2">
       <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="filter_data.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="person.proto">
+      <Filter>proto</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

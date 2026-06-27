@@ -234,6 +234,8 @@
     <ResourceCompile Include="TestMFC.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="filter_data.proto" />
+    <None Include="person.proto" />
     <None Include="res\TestMFC.rc2" />
   </ItemGroup>
   <ItemGroup>

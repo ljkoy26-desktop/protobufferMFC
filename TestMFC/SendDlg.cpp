@@ -184,6 +184,7 @@ void CSendDlg::OnBnClickedButtonSend()
     oPerson.set_name("TestUser");
     oPerson.set_id(1001);
     oPerson.set_email("test@example.com");
+	oPerson.set_email2("test@example.com");
 
     // -------------------------------------------------------
     // 2단계: 바이너리 직렬화 (Serialize)

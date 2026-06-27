@@ -1,16 +1,15 @@
 
 # 목표
 
-아래 이미지가 출력결과야.
-한글이 깨져서 나오는데 
-왜그런지 확인좀 해줄래??
 
-"C:\Users\USER\Desktop\sourceTree_root\protobufferMFC\참고자료\출력결과.png"
+아래 코드를 참조해서 filter_data.proto 부분도 Send / Recv 로직을 구현해줄래?
+
+static const DWORD COPYDATA_FILTER_DATA = 9002;
+
+
 
 
 # 수정 대상
-- TestMFCDlg.cpp / .h
-- ReceiverDlg.cpp / .h
 
 # 요구사항
 
