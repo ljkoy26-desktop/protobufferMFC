@@ -4,6 +4,8 @@
 
 아래 코드를 참조해서 filter_data.proto 부분도 Send / Recv 로직을 구현해줄래?
 
+OnCopyData 부분을 참조하면 좋을꺼야
+
 static const DWORD COPYDATA_FILTER_DATA = 9002;
 
 
