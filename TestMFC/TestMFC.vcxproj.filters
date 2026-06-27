@@ -18,7 +18,7 @@
     <ClInclude Include="TestMFC.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TestMFCDlg.h">
+    <ClInclude Include="SendDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
@@ -39,12 +39,18 @@
     <ClInclude Include="filter_data.pb.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CopyDataDefs.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ReceiverDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestMFC.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="TestMFCDlg.cpp">
+    <ClCompile Include="SendDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -54,6 +60,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="filter_data.pb.cc">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ReceiverDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

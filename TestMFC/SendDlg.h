@@ -2,10 +2,10 @@
 
 class CReceiverDlg;  // 전방 선언
 
-class CTestMFCDlg : public CDialogEx
+class CSendDlg : public CDialogEx
 {
 public:
-	CTestMFCDlg(CWnd* pParent = nullptr);
+	CSendDlg(CWnd* pParent = nullptr);
 
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_TESTMFC_DIALOG };

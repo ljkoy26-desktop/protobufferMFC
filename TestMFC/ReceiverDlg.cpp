@@ -138,7 +138,7 @@ void CReceiverDlg::OnBnClickedButtonSend()
 
     // -------------------------------------------------------
     // 3단계: 수신 윈도우 검색 (SendApp)
-    // TestMFCDlg::OnInitDialog 에서 SetWindowText("SendApp") 으로 설정합니다.
+    // SendDlg::OnInitDialog 에서 SetWindowText("SendApp") 으로 설정합니다.
     // -------------------------------------------------------
     HWND hTargetWnd = ::FindWindow(NULL, _T("SendApp"));
     if (hTargetWnd == NULL)

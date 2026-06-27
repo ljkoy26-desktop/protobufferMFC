@@ -211,7 +211,7 @@
     <ClInclude Include="CopyDataDefs.h" />
     <ClInclude Include="ReceiverDlg.h" />
     <ClInclude Include="TestMFC.h" />
-    <ClInclude Include="TestMFCDlg.h" />
+    <ClInclude Include="SendDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="filter_data.pb.cc">
@@ -228,7 +228,7 @@
     </ClCompile>
     <ClCompile Include="ReceiverDlg.cpp" />
     <ClCompile Include="TestMFC.cpp" />
-    <ClCompile Include="TestMFCDlg.cpp" />
+    <ClCompile Include="SendDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TestMFC.rc" />
