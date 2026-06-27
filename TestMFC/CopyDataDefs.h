@@ -10,6 +10,3 @@
 
 static const DWORD COPYDATA_PERSON_PROTO = 9001;
 static const DWORD COPYDATA_FILTER_DATA = 9002;
-
-
-filter_data.proto

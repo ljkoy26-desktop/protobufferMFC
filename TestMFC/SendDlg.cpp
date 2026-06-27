@@ -127,36 +127,77 @@ HCURSOR CSendDlg::OnQueryDragIcon()
 // -------------------------------------------------------
 BOOL CSendDlg::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
 {
-	// 데이터 타입 식별자 검사
-	if (pCopyDataStruct->dwData != COPYDATA_PERSON_PROTO)
+	if (pCopyDataStruct->dwData == COPYDATA_PERSON_PROTO)
 	{
-		return FALSE;
+		tutorial::Person oPerson;
+		if (!oPerson.ParseFromArray(pCopyDataStruct->lpData, pCopyDataStruct->cbData))
+		{
+			SetDlgItemText(IDC_EDIT_RECV, _T("[오류] Person 역직렬화 실패"));
+			return FALSE;
+		}
+
+		CString strDisplay;
+		strDisplay.Format(
+			_T("== Person 수신 완료 ==\r\n")
+			_T("이름  : %S\r\n")
+			_T("ID    : %d\r\n")
+			_T("이메일: %S\r\n")
+			_T("크기  : %d bytes"),
+			oPerson.name().c_str(),
+			oPerson.id(),
+			oPerson.email().c_str(),
+			pCopyDataStruct->cbData
+		);
+		SetDlgItemText(IDC_EDIT_RECV, strDisplay);
+		return TRUE;
+	}
+	else if (pCopyDataStruct->dwData == COPYDATA_FILTER_DATA)
+	{
+		my_msg::FilterConfig oFilterConfig;
+		if (!oFilterConfig.ParseFromArray(pCopyDataStruct->lpData, pCopyDataStruct->cbData))
+		{
+			SetDlgItemText(IDC_EDIT_RECV, _T("[오류] FilterConfig 역직렬화 실패"));
+			return FALSE;
+		}
+
+		CString strDisplay;
+		strDisplay.Format(_T("== FilterConfig 수신 완료 ==\r\n크기 : %d bytes\r\n"), pCopyDataStruct->cbData);
+
+		for (const auto& oPair : oFilterConfig.filter_map())
+		{
+			CString strKey(oPair.first.c_str());
+			strDisplay.AppendFormat(_T("[%s]\r\n"), (LPCTSTR)strKey);
+
+			const my_msg::FilterItem& oItem = oPair.second;
+
+			strDisplay += _T("  Include: ");
+			for (int i = 0; i < oItem.include_filters_size(); ++i)
+			{
+				if (i > 0)
+				{
+					strDisplay += _T(", ");
+				}
+				strDisplay += CString(oItem.include_filters(i).c_str());
+			}
+			strDisplay += _T("\r\n");
+
+			strDisplay += _T("  Exclude: ");
+			for (int i = 0; i < oItem.exclude_filters_size(); ++i)
+			{
+				if (i > 0)
+				{
+					strDisplay += _T(", ");
+				}
+				strDisplay += CString(oItem.exclude_filters(i).c_str());
+			}
+			strDisplay += _T("\r\n");
+		}
+
+		SetDlgItemText(IDC_EDIT_RECV, strDisplay);
+		return TRUE;
 	}
 
-	// protobuf 역직렬화
-	tutorial::Person oPerson;
-	if (!oPerson.ParseFromArray(pCopyDataStruct->lpData, pCopyDataStruct->cbData))
-	{
-		SetDlgItemText(IDC_EDIT_RECV, _T("[오류] protobuf 역직렬화 실패"));
-		return FALSE;
-	}
-
-	// IDC_EDIT_RECV 에 수신 내용 표시
-	CString strDisplay;
-	strDisplay.Format(
-		_T("== 수신 완료 ==\r\n")
-		_T("이름  : %S\r\n")
-		_T("ID    : %d\r\n")
-		_T("이메일: %S\r\n")
-		_T("크기  : %d bytes"),
-		oPerson.name().c_str(),
-		oPerson.id(),
-		oPerson.email().c_str(),
-		pCopyDataStruct->cbData
-	);
-	SetDlgItemText(IDC_EDIT_RECV, strDisplay);
-
-	return TRUE;  // 처리 완료 → 송신 측 SendMessage 반환값 = 1
+	return FALSE;
 }
 
 
@@ -178,27 +219,7 @@ void CSendDlg::OnDestroy()
 void CSendDlg::OnBnClickedButtonSend()
 {
     // -------------------------------------------------------
-    // 1단계: Person 메시지 객체 생성 및 필드 설정
-    // -------------------------------------------------------
-    tutorial::Person oPerson;
-    oPerson.set_name("TestUser");
-    oPerson.set_id(1001);
-    oPerson.set_email("test@example.com");
-	oPerson.set_email2("test@example.com");
-
-    // -------------------------------------------------------
-    // 2단계: 바이너리 직렬화 (Serialize)
-    // -------------------------------------------------------
-    std::string strSerializedData;
-    if (!oPerson.SerializeToString(&strSerializedData))
-    {
-        AfxMessageBox(_T("직렬화(SerializeToString) 실패"));
-        return;
-    }
-
-    // -------------------------------------------------------
-    // 3단계: 수신 윈도우 검색
-    // FindWindow(클래스명, 윈도우타이틀) — 수신 프로그램에 맞게 변경하세요.
+    // 1단계: 수신 윈도우 검색 (ReceiverApp)
     // -------------------------------------------------------
     HWND hTargetWnd = ::FindWindow(NULL, _T("ReceiverApp"));
     if (hTargetWnd == NULL)
@@ -208,46 +229,83 @@ void CSendDlg::OnBnClickedButtonSend()
     }
 
     // -------------------------------------------------------
-    // 4단계: COPYDATASTRUCT 구성
+    // 2단계: Person 메시지 생성 → 직렬화 → 전송
     // -------------------------------------------------------
-    COPYDATASTRUCT oCds;
-    oCds.dwData = COPYDATA_PERSON_PROTO;                              // 데이터 타입 식별자
-    oCds.cbData = static_cast<DWORD>(strSerializedData.size());      // 데이터 크기 (바이트)
-    oCds.lpData = const_cast<char*>(strSerializedData.data());       // 직렬화된 바이너리 포인터
+    tutorial::Person oPerson;
+    oPerson.set_name("TestUser");
+    oPerson.set_id(1001);
+    oPerson.set_email("test@example.com");
+    oPerson.set_email2("test@example.com");
 
-    // -------------------------------------------------------
-    // 5단계: WM_COPYDATA 전송
-    // wParam : 송신 윈도우 핸들, lParam : COPYDATASTRUCT 포인터
-    // -------------------------------------------------------
-    LRESULT lResult = ::SendMessage(
+    std::string strPersonData;
+    if (!oPerson.SerializeToString(&strPersonData))
+    {
+        AfxMessageBox(_T("Person 직렬화(SerializeToString) 실패"));
+        return;
+    }
+
+    COPYDATASTRUCT oCdsPerson;
+    oCdsPerson.dwData = COPYDATA_PERSON_PROTO;
+    oCdsPerson.cbData = static_cast<DWORD>(strPersonData.size());
+    oCdsPerson.lpData = const_cast<char*>(strPersonData.data());
+
+    LRESULT lResultPerson = ::SendMessage(
         hTargetWnd,
         WM_COPYDATA,
         reinterpret_cast<WPARAM>(GetSafeHwnd()),
-        reinterpret_cast<LPARAM>(&oCds)
+        reinterpret_cast<LPARAM>(&oCdsPerson)
     );
 
     // -------------------------------------------------------
-    // 6단계: 결과 출력
+    // 3단계: FilterConfig 메시지 생성 → 직렬화 → 전송
+    // -------------------------------------------------------
+    my_msg::FilterConfig oFilterConfig;
+    auto& oFilterItem = (*oFilterConfig.mutable_filter_map())["FilterList1"];
+    oFilterItem.add_include_filters("EMP");
+    oFilterItem.add_include_filters("EMP100");
+    oFilterItem.add_exclude_filters("MS");
+
+    std::string strFilterData;
+    if (!oFilterConfig.SerializeToString(&strFilterData))
+    {
+        AfxMessageBox(_T("FilterConfig 직렬화(SerializeToString) 실패"));
+        return;
+    }
+
+    COPYDATASTRUCT oCdsFilter;
+    oCdsFilter.dwData = COPYDATA_FILTER_DATA;
+    oCdsFilter.cbData = static_cast<DWORD>(strFilterData.size());
+    oCdsFilter.lpData = const_cast<char*>(strFilterData.data());
+
+    LRESULT lResultFilter = ::SendMessage(
+        hTargetWnd,
+        WM_COPYDATA,
+        reinterpret_cast<WPARAM>(GetSafeHwnd()),
+        reinterpret_cast<LPARAM>(&oCdsFilter)
+    );
+
+    // -------------------------------------------------------
+    // 4단계: 결과 출력
     // -------------------------------------------------------
     CString strMsg;
-    if (lResult)
-    {
-        strMsg.Format(
-            _T("WM_COPYDATA 전송 성공\n")
-            _T("이름  : %S\n")
-            _T("ID    : %d\n")
-            _T("이메일: %S\n")
-            _T("크기  : %d bytes"),
-            oPerson.name().c_str(),
-            oPerson.id(),
-            oPerson.email().c_str(),
-            oCds.cbData
-        );
-    }
-    else
-    {
-        strMsg = _T("WM_COPYDATA 전송 실패\n수신 프로그램이 메시지를 처리하지 않았습니다.");
-    }
+    strMsg.Format(
+        _T("[ Person 전송 : %s ]\r\n")
+        _T("이름  : %S\r\n")
+        _T("ID    : %d\r\n")
+        _T("이메일: %S\r\n")
+        _T("크기  : %d bytes\r\n\r\n")
+        _T("[ FilterConfig 전송 : %s ]\r\n")
+        _T("키 수 : %d\r\n")
+        _T("크기  : %d bytes"),
+        lResultPerson ? _T("성공") : _T("실패"),
+        oPerson.name().c_str(),
+        oPerson.id(),
+        oPerson.email().c_str(),
+        static_cast<DWORD>(strPersonData.size()),
+        lResultFilter ? _T("성공") : _T("실패"),
+        oFilterConfig.filter_map_size(),
+        static_cast<DWORD>(strFilterData.size())
+    );
     AfxMessageBox(strMsg);
 }
 
