@@ -1,6 +1,6 @@
-폴더 PATH의 목록입니다.
-볼륨 일련 번호는 ECE3-C6D1입니다.
-C:.
+2TB_Nvme2 볼륨에 대한 폴더 경로의 목록입니다.
+볼륨 일련 번호가 00000097 6657:F8FC입니다.
+H:.
 │  .gitignore
 │  filelist.txt
 │  make_tree.bat
@@ -9,27 +9,986 @@ C:.
 │      settings.local.json
 │      
 ├─bin
-│  └─Debug x64
+│  ├─Debug x64
+│  │      abseil_dll.dll
+│  │      abseil_dll.pdb
+│  │      libprotobuf-lited.dll
+│  │      libprotobuf-lited.pdb
+│  │      libprotobufd.dll
+│  │      libprotobufd.pdb
+│  │      libprotocd.dll
+│  │      libprotocd.pdb
+│  │      protobufferD.pdb
+│  │      
+│  └─Release x64
 │          abseil_dll.dll
-│          libprotobufd.dll
-│          protobufferD.exe
-│          protobufferD.pdb
+│          libprotobuf.dll
+│          protobuffer.exe
+│          protobuffer.pdb
 │          
+├─include
+│  │  utf8_range.h
+│  │  utf8_validity.h
+│  │  
+│  ├─absl
+│  │  ├─algorithm
+│  │  │      algorithm.h
+│  │  │      container.h
+│  │  │      
+│  │  ├─base
+│  │  │  │  attributes.h
+│  │  │  │  call_once.h
+│  │  │  │  casts.h
+│  │  │  │  config.h
+│  │  │  │  const_init.h
+│  │  │  │  dynamic_annotations.h
+│  │  │  │  fast_type_id.h
+│  │  │  │  log_severity.h
+│  │  │  │  macros.h
+│  │  │  │  no_destructor.h
+│  │  │  │  nullability.h
+│  │  │  │  optimization.h
+│  │  │  │  options.h
+│  │  │  │  policy_checks.h
+│  │  │  │  port.h
+│  │  │  │  prefetch.h
+│  │  │  │  thread_annotations.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          atomic_hook.h
+│  │  │          atomic_hook_test_helper.h
+│  │  │          cycleclock.h
+│  │  │          cycleclock_config.h
+│  │  │          direct_mmap.h
+│  │  │          dynamic_annotations.h
+│  │  │          endian.h
+│  │  │          errno_saver.h
+│  │  │          exception_safety_testing.h
+│  │  │          exception_testing.h
+│  │  │          hide_ptr.h
+│  │  │          identity.h
+│  │  │          iterator_traits.h
+│  │  │          iterator_traits_test_helper.h
+│  │  │          low_level_alloc.h
+│  │  │          low_level_scheduling.h
+│  │  │          per_thread_tls.h
+│  │  │          poison.h
+│  │  │          pretty_function.h
+│  │  │          raw_logging.h
+│  │  │          scheduling_mode.h
+│  │  │          scoped_set_env.h
+│  │  │          spinlock.h
+│  │  │          spinlock_akaros.inc
+│  │  │          spinlock_linux.inc
+│  │  │          spinlock_posix.inc
+│  │  │          spinlock_wait.h
+│  │  │          spinlock_win32.inc
+│  │  │          strerror.h
+│  │  │          sysinfo.h
+│  │  │          thread_identity.h
+│  │  │          throw_delegate.h
+│  │  │          tracing.h
+│  │  │          tsan_mutex_interface.h
+│  │  │          unaligned_access.h
+│  │  │          unscaledcycleclock.h
+│  │  │          unscaledcycleclock_config.h
+│  │  │          
+│  │  ├─cleanup
+│  │  │  │  cleanup.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          cleanup.h
+│  │  │          
+│  │  ├─container
+│  │  │  │  btree_map.h
+│  │  │  │  btree_set.h
+│  │  │  │  btree_test.h
+│  │  │  │  fixed_array.h
+│  │  │  │  flat_hash_map.h
+│  │  │  │  flat_hash_set.h
+│  │  │  │  hash_container_defaults.h
+│  │  │  │  inlined_vector.h
+│  │  │  │  node_hash_map.h
+│  │  │  │  node_hash_set.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          btree.h
+│  │  │          btree_container.h
+│  │  │          common.h
+│  │  │          common_policy_traits.h
+│  │  │          compressed_tuple.h
+│  │  │          container_memory.h
+│  │  │          hashtablez_sampler.h
+│  │  │          hashtable_control_bytes.h
+│  │  │          hashtable_debug.h
+│  │  │          hashtable_debug_hooks.h
+│  │  │          hash_function_defaults.h
+│  │  │          hash_generator_testing.h
+│  │  │          hash_policy_testing.h
+│  │  │          hash_policy_traits.h
+│  │  │          inlined_vector.h
+│  │  │          layout.h
+│  │  │          node_slot_policy.h
+│  │  │          raw_hash_map.h
+│  │  │          raw_hash_set.h
+│  │  │          raw_hash_set_resize_impl.h
+│  │  │          test_allocator.h
+│  │  │          test_instance_tracker.h
+│  │  │          tracked.h
+│  │  │          unordered_map_constructor_test.h
+│  │  │          unordered_map_lookup_test.h
+│  │  │          unordered_map_members_test.h
+│  │  │          unordered_map_modifiers_test.h
+│  │  │          unordered_set_constructor_test.h
+│  │  │          unordered_set_lookup_test.h
+│  │  │          unordered_set_members_test.h
+│  │  │          unordered_set_modifiers_test.h
+│  │  │          
+│  │  ├─crc
+│  │  │  │  crc32c.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          cpu_detect.h
+│  │  │          crc.h
+│  │  │          crc32c.h
+│  │  │          crc32c_inline.h
+│  │  │          crc32_x86_arm_combined_simd.h
+│  │  │          crc_cord_state.h
+│  │  │          crc_internal.h
+│  │  │          crc_memcpy.h
+│  │  │          non_temporal_arm_intrinsics.h
+│  │  │          non_temporal_memcpy.h
+│  │  │          
+│  │  ├─debugging
+│  │  │  │  failure_signal_handler.h
+│  │  │  │  leak_check.h
+│  │  │  │  stacktrace.h
+│  │  │  │  symbolize.h
+│  │  │  │  symbolize_darwin.inc
+│  │  │  │  symbolize_elf.inc
+│  │  │  │  symbolize_emscripten.inc
+│  │  │  │  symbolize_unimplemented.inc
+│  │  │  │  symbolize_win32.inc
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          addresses.h
+│  │  │          address_is_readable.h
+│  │  │          bounded_utf8_length_sequence.h
+│  │  │          decode_rust_punycode.h
+│  │  │          demangle.h
+│  │  │          demangle_rust.h
+│  │  │          elf_mem_image.h
+│  │  │          examine_stack.h
+│  │  │          stacktrace_aarch64-inl.inc
+│  │  │          stacktrace_arm-inl.inc
+│  │  │          stacktrace_config.h
+│  │  │          stacktrace_emscripten-inl.inc
+│  │  │          stacktrace_generic-inl.inc
+│  │  │          stacktrace_powerpc-inl.inc
+│  │  │          stacktrace_riscv-inl.inc
+│  │  │          stacktrace_unimplemented-inl.inc
+│  │  │          stacktrace_win32-inl.inc
+│  │  │          stacktrace_x86-inl.inc
+│  │  │          stack_consumption.h
+│  │  │          symbolize.h
+│  │  │          utf8_for_code_point.h
+│  │  │          vdso_support.h
+│  │  │          
+│  │  ├─flags
+│  │  │  │  commandlineflag.h
+│  │  │  │  config.h
+│  │  │  │  declare.h
+│  │  │  │  flag.h
+│  │  │  │  marshalling.h
+│  │  │  │  parse.h
+│  │  │  │  reflection.h
+│  │  │  │  usage.h
+│  │  │  │  usage_config.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          commandlineflag.h
+│  │  │          flag.h
+│  │  │          parse.h
+│  │  │          path_util.h
+│  │  │          private_handle_accessor.h
+│  │  │          program_name.h
+│  │  │          registry.h
+│  │  │          sequence_lock.h
+│  │  │          usage.h
+│  │  │          
+│  │  ├─functional
+│  │  │  │  any_invocable.h
+│  │  │  │  bind_front.h
+│  │  │  │  function_ref.h
+│  │  │  │  overload.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          any_invocable.h
+│  │  │          front_binder.h
+│  │  │          function_ref.h
+│  │  │          
+│  │  ├─hash
+│  │  │  │  hash.h
+│  │  │  │  hash_testing.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          city.h
+│  │  │          hash.h
+│  │  │          hash_test.h
+│  │  │          spy_hash_state.h
+│  │  │          weakly_mixed_integer.h
+│  │  │          
+│  │  ├─log
+│  │  │  │  absl_check.h
+│  │  │  │  absl_log.h
+│  │  │  │  absl_vlog_is_on.h
+│  │  │  │  check.h
+│  │  │  │  check_test_impl.inc
+│  │  │  │  die_if_null.h
+│  │  │  │  flags.h
+│  │  │  │  globals.h
+│  │  │  │  initialize.h
+│  │  │  │  log.h
+│  │  │  │  log_basic_test_impl.inc
+│  │  │  │  log_entry.h
+│  │  │  │  log_sink.h
+│  │  │  │  log_sink_registry.h
+│  │  │  │  log_streamer.h
+│  │  │  │  scoped_mock_log.h
+│  │  │  │  structured.h
+│  │  │  │  vlog_is_on.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          append_truncated.h
+│  │  │          check_impl.h
+│  │  │          check_op.h
+│  │  │          conditions.h
+│  │  │          config.h
+│  │  │          flags.h
+│  │  │          fnmatch.h
+│  │  │          globals.h
+│  │  │          log_format.h
+│  │  │          log_impl.h
+│  │  │          log_message.h
+│  │  │          log_sink_set.h
+│  │  │          nullguard.h
+│  │  │          nullstream.h
+│  │  │          proto.h
+│  │  │          strip.h
+│  │  │          structured.h
+│  │  │          structured_proto.h
+│  │  │          test_actions.h
+│  │  │          test_helpers.h
+│  │  │          test_matchers.h
+│  │  │          vlog_config.h
+│  │  │          voidify.h
+│  │  │          
+│  │  ├─memory
+│  │  │      memory.h
+│  │  │      
+│  │  ├─meta
+│  │  │      type_traits.h
+│  │  │      
+│  │  ├─numeric
+│  │  │  │  bits.h
+│  │  │  │  int128.h
+│  │  │  │  int128_have_intrinsic.inc
+│  │  │  │  int128_no_intrinsic.inc
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          bits.h
+│  │  │          representation.h
+│  │  │          
+│  │  ├─profiling
+│  │  │  │  hashtable.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          exponential_biased.h
+│  │  │          periodic_sampler.h
+│  │  │          profile_builder.h
+│  │  │          sample_recorder.h
+│  │  │          
+│  │  ├─random
+│  │  │  │  bernoulli_distribution.h
+│  │  │  │  beta_distribution.h
+│  │  │  │  bit_gen_ref.h
+│  │  │  │  discrete_distribution.h
+│  │  │  │  distributions.h
+│  │  │  │  exponential_distribution.h
+│  │  │  │  gaussian_distribution.h
+│  │  │  │  log_uniform_int_distribution.h
+│  │  │  │  mocking_bit_gen.h
+│  │  │  │  mock_distributions.h
+│  │  │  │  poisson_distribution.h
+│  │  │  │  random.h
+│  │  │  │  seed_gen_exception.h
+│  │  │  │  seed_sequences.h
+│  │  │  │  uniform_int_distribution.h
+│  │  │  │  uniform_real_distribution.h
+│  │  │  │  zipf_distribution.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          chi_square.h
+│  │  │          distribution_caller.h
+│  │  │          distribution_test_util.h
+│  │  │          entropy_pool.h
+│  │  │          explicit_seed_seq.h
+│  │  │          fastmath.h
+│  │  │          fast_uniform_bits.h
+│  │  │          generate_real.h
+│  │  │          iostream_state_saver.h
+│  │  │          mock_helpers.h
+│  │  │          mock_overload_set.h
+│  │  │          mock_validators.h
+│  │  │          nanobenchmark.h
+│  │  │          nonsecure_base.h
+│  │  │          pcg_engine.h
+│  │  │          platform.h
+│  │  │          randen.h
+│  │  │          randen_detect.h
+│  │  │          randen_engine.h
+│  │  │          randen_hwaes.h
+│  │  │          randen_slow.h
+│  │  │          randen_traits.h
+│  │  │          salted_seed_seq.h
+│  │  │          seed_material.h
+│  │  │          sequence_urbg.h
+│  │  │          traits.h
+│  │  │          uniform_helper.h
+│  │  │          wide_multiply.h
+│  │  │          
+│  │  ├─status
+│  │  │  │  status.h
+│  │  │  │  statusor.h
+│  │  │  │  status_matchers.h
+│  │  │  │  status_payload_printer.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          statusor_internal.h
+│  │  │          status_internal.h
+│  │  │          status_matchers.h
+│  │  │          
+│  │  ├─strings
+│  │  │  │  ascii.h
+│  │  │  │  charconv.h
+│  │  │  │  charset.h
+│  │  │  │  cord.h
+│  │  │  │  cordz_test_helpers.h
+│  │  │  │  cord_analysis.h
+│  │  │  │  cord_buffer.h
+│  │  │  │  cord_test_helpers.h
+│  │  │  │  escaping.h
+│  │  │  │  has_absl_stringify.h
+│  │  │  │  has_ostream_operator.h
+│  │  │  │  match.h
+│  │  │  │  numbers.h
+│  │  │  │  string_view.h
+│  │  │  │  strip.h
+│  │  │  │  str_cat.h
+│  │  │  │  str_format.h
+│  │  │  │  str_join.h
+│  │  │  │  str_replace.h
+│  │  │  │  str_split.h
+│  │  │  │  substitute.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │      │  charconv_bigint.h
+│  │  │      │  charconv_parse.h
+│  │  │      │  cordz_functions.h
+│  │  │      │  cordz_handle.h
+│  │  │      │  cordz_info.h
+│  │  │      │  cordz_sample_token.h
+│  │  │      │  cordz_statistics.h
+│  │  │      │  cordz_update_scope.h
+│  │  │      │  cordz_update_tracker.h
+│  │  │      │  cord_data_edge.h
+│  │  │      │  cord_internal.h
+│  │  │      │  cord_rep_btree.h
+│  │  │      │  cord_rep_btree_navigator.h
+│  │  │      │  cord_rep_btree_reader.h
+│  │  │      │  cord_rep_consume.h
+│  │  │      │  cord_rep_crc.h
+│  │  │      │  cord_rep_flat.h
+│  │  │      │  cord_rep_test_util.h
+│  │  │      │  damerau_levenshtein_distance.h
+│  │  │      │  escaping.h
+│  │  │      │  escaping_test_common.h
+│  │  │      │  memutil.h
+│  │  │      │  numbers_test_common.h
+│  │  │      │  ostringstream.h
+│  │  │      │  pow10_helper.h
+│  │  │      │  resize_uninitialized.h
+│  │  │      │  stl_type_traits.h
+│  │  │      │  stringify_sink.h
+│  │  │      │  string_constant.h
+│  │  │      │  str_join_internal.h
+│  │  │      │  str_split_internal.h
+│  │  │      │  utf8.h
+│  │  │      │  
+│  │  │      └─str_format
+│  │  │              arg.h
+│  │  │              bind.h
+│  │  │              checker.h
+│  │  │              constexpr_parser.h
+│  │  │              extension.h
+│  │  │              float_conversion.h
+│  │  │              output.h
+│  │  │              parser.h
+│  │  │              
+│  │  ├─synchronization
+│  │  │  │  barrier.h
+│  │  │  │  blocking_counter.h
+│  │  │  │  mutex.h
+│  │  │  │  notification.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          create_thread_identity.h
+│  │  │          futex.h
+│  │  │          futex_waiter.h
+│  │  │          graphcycles.h
+│  │  │          kernel_timeout.h
+│  │  │          per_thread_sem.h
+│  │  │          pthread_waiter.h
+│  │  │          sem_waiter.h
+│  │  │          stdcpp_waiter.h
+│  │  │          thread_pool.h
+│  │  │          waiter.h
+│  │  │          waiter_base.h
+│  │  │          win32_waiter.h
+│  │  │          
+│  │  ├─time
+│  │  │  │  civil_time.h
+│  │  │  │  clock.h
+│  │  │  │  time.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │      │  get_current_time_chrono.inc
+│  │  │      │  get_current_time_posix.inc
+│  │  │      │  test_util.h
+│  │  │      │  
+│  │  │      └─cctz
+│  │  │          ├─include
+│  │  │          │  └─cctz
+│  │  │          │          civil_time.h
+│  │  │          │          civil_time_detail.h
+│  │  │          │          time_zone.h
+│  │  │          │          zone_info_source.h
+│  │  │          │          
+│  │  │          └─src
+│  │  │                  test_time_zone_names.h
+│  │  │                  time_zone_fixed.h
+│  │  │                  time_zone_if.h
+│  │  │                  time_zone_impl.h
+│  │  │                  time_zone_info.h
+│  │  │                  time_zone_libc.h
+│  │  │                  time_zone_posix.h
+│  │  │                  tzfile.h
+│  │  │                  
+│  │  ├─types
+│  │  │  │  any.h
+│  │  │  │  compare.h
+│  │  │  │  optional.h
+│  │  │  │  span.h
+│  │  │  │  variant.h
+│  │  │  │  
+│  │  │  └─internal
+│  │  │          span.h
+│  │  │          
+│  │  └─utility
+│  │          utility.h
+│  │          
+│  └─google
+│      └─protobuf
+│          │  any.h
+│          │  any.pb.h
+│          │  any.proto
+│          │  api.pb.h
+│          │  api.proto
+│          │  arena.h
+│          │  arenastring.h
+│          │  arenaz_sampler.h
+│          │  arena_align.h
+│          │  arena_allocation_policy.h
+│          │  arena_cleanup.h
+│          │  cpp_edition_defaults.h
+│          │  cpp_features.pb.h
+│          │  cpp_features.proto
+│          │  descriptor.h
+│          │  descriptor.pb.h
+│          │  descriptor.proto
+│          │  descriptor_database.h
+│          │  descriptor_legacy.h
+│          │  descriptor_lite.h
+│          │  descriptor_visitor.h
+│          │  duration.pb.h
+│          │  duration.proto
+│          │  dynamic_message.h
+│          │  empty.pb.h
+│          │  empty.proto
+│          │  endian.h
+│          │  explicitly_constructed.h
+│          │  extension_set.h
+│          │  extension_set_inl.h
+│          │  feature_resolver.h
+│          │  field_access_listener.h
+│          │  field_mask.pb.h
+│          │  field_mask.proto
+│          │  generated_enum_reflection.h
+│          │  generated_enum_util.h
+│          │  generated_message_bases.h
+│          │  generated_message_reflection.h
+│          │  generated_message_tctable_decl.h
+│          │  generated_message_tctable_gen.h
+│          │  generated_message_tctable_impl.h
+│          │  generated_message_util.h
+│          │  has_bits.h
+│          │  implicit_weak_message.h
+│          │  inlined_string_field.h
+│          │  internal_feature_helper.h
+│          │  internal_visibility.h
+│          │  map.h
+│          │  map_entry.h
+│          │  map_field.h
+│          │  map_field_lite.h
+│          │  map_type_handler.h
+│          │  message.h
+│          │  message_lite.h
+│          │  metadata.h
+│          │  metadata_lite.h
+│          │  micro_string.h
+│          │  os_macros_restore.inc
+│          │  os_macros_undef.inc
+│          │  parse_context.h
+│          │  port.h
+│          │  port_def.inc
+│          │  port_undef.inc
+│          │  raw_ptr.h
+│          │  reflection.h
+│          │  reflection_internal.h
+│          │  reflection_mode.h
+│          │  reflection_ops.h
+│          │  reflection_visit_fields.h
+│          │  reflection_visit_field_info.h
+│          │  repeated_field.h
+│          │  repeated_ptr_field.h
+│          │  runtime_version.h
+│          │  serial_arena.h
+│          │  service.h
+│          │  source_context.pb.h
+│          │  source_context.proto
+│          │  string_block.h
+│          │  struct.pb.h
+│          │  struct.proto
+│          │  text_format.h
+│          │  thread_safe_arena.h
+│          │  timestamp.pb.h
+│          │  timestamp.proto
+│          │  type.pb.h
+│          │  type.proto
+│          │  unknown_field_set.h
+│          │  varint_shuffle.h
+│          │  wire_format.h
+│          │  wire_format_lite.h
+│          │  wrappers.pb.h
+│          │  wrappers.proto
+│          │  
+│          ├─compiler
+│          │  │  code_generator.h
+│          │  │  code_generator_lite.h
+│          │  │  command_line_interface.h
+│          │  │  importer.h
+│          │  │  notices.h
+│          │  │  parser.h
+│          │  │  plugin.h
+│          │  │  plugin.pb.h
+│          │  │  plugin.proto
+│          │  │  retention.h
+│          │  │  scc.h
+│          │  │  subprocess.h
+│          │  │  versions.h
+│          │  │  zip_writer.h
+│          │  │  
+│          │  ├─cpp
+│          │  │      generator.h
+│          │  │      helpers.h
+│          │  │      names.h
+│          │  │      options.h
+│          │  │      
+│          │  ├─csharp
+│          │  │      csharp_generator.h
+│          │  │      names.h
+│          │  │      
+│          │  ├─java
+│          │  │      doc_comment.h
+│          │  │      generator.h
+│          │  │      helpers.h
+│          │  │      java_features.pb.h
+│          │  │      names.h
+│          │  │      names_internal.h
+│          │  │      name_resolver.h
+│          │  │      options.h
+│          │  │      
+│          │  ├─kotlin
+│          │  │      generator.h
+│          │  │      
+│          │  ├─objectivec
+│          │  │      generator.h
+│          │  │      line_consumer.h
+│          │  │      names.h
+│          │  │      nsobject_methods.h
+│          │  │      
+│          │  ├─php
+│          │  │      names.h
+│          │  │      php_generator.h
+│          │  │      
+│          │  ├─python
+│          │  │      generator.h
+│          │  │      pyi_generator.h
+│          │  │      
+│          │  └─ruby
+│          │          ruby_generator.h
+│          │          
+│          ├─io
+│          │      coded_stream.h
+│          │      gzip_stream.h
+│          │      io_win32.h
+│          │      printer.h
+│          │      strtod.h
+│          │      tokenizer.h
+│          │      zero_copy_sink.h
+│          │      zero_copy_stream.h
+│          │      zero_copy_stream_impl.h
+│          │      zero_copy_stream_impl_lite.h
+│          │      
+│          ├─json
+│          │  │  json.h
+│          │  │  
+│          │  └─internal
+│          │          descriptor_traits.h
+│          │          lexer.h
+│          │          message_path.h
+│          │          parser.h
+│          │          parser_traits.h
+│          │          unparser.h
+│          │          unparser_traits.h
+│          │          untyped_message.h
+│          │          writer.h
+│          │          zero_copy_buffered_stream.h
+│          │          
+│          ├─stubs
+│          │      callback.h
+│          │      common.h
+│          │      platform_macros.h
+│          │      port.h
+│          │      status_macros.h
+│          │      
+│          └─util
+│                  delimited_message_util.h
+│                  field_comparator.h
+│                  field_mask_util.h
+│                  internal_timeval.h
+│                  json_util.h
+│                  message_differencer.h
+│                  time_util.h
+│                  type_resolver.h
+│                  type_resolver_util.h
+│                  
+├─lib64
+│  └─protobuf
+│      ├─Debug
+│      │  │  abseil_dll.lib
+│      │  │  absl_decode_rust_punycode.lib
+│      │  │  absl_demangle_rust.lib
+│      │  │  absl_flags_commandlineflag.lib
+│      │  │  absl_flags_commandlineflag_internal.lib
+│      │  │  absl_flags_config.lib
+│      │  │  absl_flags_internal.lib
+│      │  │  absl_flags_marshalling.lib
+│      │  │  absl_flags_parse.lib
+│      │  │  absl_flags_private_handle_accessor.lib
+│      │  │  absl_flags_program_name.lib
+│      │  │  absl_flags_reflection.lib
+│      │  │  absl_flags_usage.lib
+│      │  │  absl_flags_usage_internal.lib
+│      │  │  absl_hashtable_profiler.lib
+│      │  │  absl_log_flags.lib
+│      │  │  absl_log_internal_structured_proto.lib
+│      │  │  absl_poison.lib
+│      │  │  absl_profile_builder.lib
+│      │  │  absl_random_internal_entropy_pool.lib
+│      │  │  absl_tracing_internal.lib
+│      │  │  absl_utf8_for_code_point.lib
+│      │  │  libprotobuf-lited.lib
+│      │  │  libprotobufd.lib
+│      │  │  libprotocd.lib
+│      │  │  libupbd.lib
+│      │  │  utf8_range.lib
+│      │  │  utf8_validity.lib
+│      │  │  
+│      │  └─pkgconfig
+│      │          abseil_dll.pc
+│      │          absl_absl_check.pc
+│      │          absl_absl_log.pc
+│      │          absl_absl_vlog_is_on.pc
+│      │          absl_algorithm.pc
+│      │          absl_algorithm_container.pc
+│      │          absl_any.pc
+│      │          absl_any_invocable.pc
+│      │          absl_atomic_hook.pc
+│      │          absl_bad_any_cast.pc
+│      │          absl_bad_optional_access.pc
+│      │          absl_bad_variant_access.pc
+│      │          absl_base.pc
+│      │          absl_base_internal.pc
+│      │          absl_bind_front.pc
+│      │          absl_bits.pc
+│      │          absl_bounded_utf8_length_sequence.pc
+│      │          absl_btree.pc
+│      │          absl_charset.pc
+│      │          absl_check.pc
+│      │          absl_city.pc
+│      │          absl_civil_time.pc
+│      │          absl_cleanup.pc
+│      │          absl_cleanup_internal.pc
+│      │          absl_common_policy_traits.pc
+│      │          absl_compare.pc
+│      │          absl_compressed_tuple.pc
+│      │          absl_config.pc
+│      │          absl_container_common.pc
+│      │          absl_container_memory.pc
+│      │          absl_cord.pc
+│      │          absl_cordz_functions.pc
+│      │          absl_cordz_handle.pc
+│      │          absl_cordz_info.pc
+│      │          absl_cordz_sample_token.pc
+│      │          absl_cordz_statistics.pc
+│      │          absl_cordz_update_scope.pc
+│      │          absl_cordz_update_tracker.pc
+│      │          absl_cord_internal.pc
+│      │          absl_core_headers.pc
+│      │          absl_crc32c.pc
+│      │          absl_crc_cord_state.pc
+│      │          absl_crc_cpu_detect.pc
+│      │          absl_crc_internal.pc
+│      │          absl_debugging.pc
+│      │          absl_debugging_internal.pc
+│      │          absl_decode_rust_punycode.pc
+│      │          absl_demangle_internal.pc
+│      │          absl_demangle_rust.pc
+│      │          absl_die_if_null.pc
+│      │          absl_dynamic_annotations.pc
+│      │          absl_endian.pc
+│      │          absl_errno_saver.pc
+│      │          absl_examine_stack.pc
+│      │          absl_exponential_biased.pc
+│      │          absl_failure_signal_handler.pc
+│      │          absl_fast_type_id.pc
+│      │          absl_fixed_array.pc
+│      │          absl_flags.pc
+│      │          absl_flags_commandlineflag.pc
+│      │          absl_flags_commandlineflag_internal.pc
+│      │          absl_flags_config.pc
+│      │          absl_flags_internal.pc
+│      │          absl_flags_marshalling.pc
+│      │          absl_flags_parse.pc
+│      │          absl_flags_path_util.pc
+│      │          absl_flags_private_handle_accessor.pc
+│      │          absl_flags_program_name.pc
+│      │          absl_flags_reflection.pc
+│      │          absl_flags_usage.pc
+│      │          absl_flags_usage_internal.pc
+│      │          absl_flat_hash_map.pc
+│      │          absl_flat_hash_set.pc
+│      │          absl_function_ref.pc
+│      │          absl_graphcycles_internal.pc
+│      │          absl_hash.pc
+│      │          absl_hashtablez_sampler.pc
+│      │          absl_hashtable_control_bytes.pc
+│      │          absl_hashtable_debug.pc
+│      │          absl_hashtable_debug_hooks.pc
+│      │          absl_hashtable_profiler.pc
+│      │          absl_hash_container_defaults.pc
+│      │          absl_hash_function_defaults.pc
+│      │          absl_hash_policy_traits.pc
+│      │          absl_has_ostream_operator.pc
+│      │          absl_inlined_vector.pc
+│      │          absl_inlined_vector_internal.pc
+│      │          absl_int128.pc
+│      │          absl_iterator_traits_internal.pc
+│      │          absl_iterator_traits_test_helper_internal.pc
+│      │          absl_kernel_timeout_internal.pc
+│      │          absl_layout.pc
+│      │          absl_leak_check.pc
+│      │          absl_log.pc
+│      │          absl_log_entry.pc
+│      │          absl_log_flags.pc
+│      │          absl_log_globals.pc
+│      │          absl_log_initialize.pc
+│      │          absl_log_internal_append_truncated.pc
+│      │          absl_log_internal_check_impl.pc
+│      │          absl_log_internal_check_op.pc
+│      │          absl_log_internal_conditions.pc
+│      │          absl_log_internal_config.pc
+│      │          absl_log_internal_flags.pc
+│      │          absl_log_internal_fnmatch.pc
+│      │          absl_log_internal_format.pc
+│      │          absl_log_internal_globals.pc
+│      │          absl_log_internal_log_impl.pc
+│      │          absl_log_internal_log_sink_set.pc
+│      │          absl_log_internal_message.pc
+│      │          absl_log_internal_nullguard.pc
+│      │          absl_log_internal_nullstream.pc
+│      │          absl_log_internal_proto.pc
+│      │          absl_log_internal_strip.pc
+│      │          absl_log_internal_structured.pc
+│      │          absl_log_internal_structured_proto.pc
+│      │          absl_log_internal_voidify.pc
+│      │          absl_log_severity.pc
+│      │          absl_log_sink.pc
+│      │          absl_log_sink_registry.pc
+│      │          absl_log_streamer.pc
+│      │          absl_log_structured.pc
+│      │          absl_malloc_internal.pc
+│      │          absl_memory.pc
+│      │          absl_meta.pc
+│      │          absl_node_hash_map.pc
+│      │          absl_node_hash_set.pc
+│      │          absl_node_slot_policy.pc
+│      │          absl_non_temporal_arm_intrinsics.pc
+│      │          absl_non_temporal_memcpy.pc
+│      │          absl_no_destructor.pc
+│      │          absl_nullability.pc
+│      │          absl_numeric.pc
+│      │          absl_numeric_representation.pc
+│      │          absl_optional.pc
+│      │          absl_overload.pc
+│      │          absl_periodic_sampler.pc
+│      │          absl_poison.pc
+│      │          absl_prefetch.pc
+│      │          absl_pretty_function.pc
+│      │          absl_profile_builder.pc
+│      │          absl_random_bit_gen_ref.pc
+│      │          absl_random_distributions.pc
+│      │          absl_random_internal_distribution_caller.pc
+│      │          absl_random_internal_distribution_test_util.pc
+│      │          absl_random_internal_entropy_pool.pc
+│      │          absl_random_internal_fastmath.pc
+│      │          absl_random_internal_fast_uniform_bits.pc
+│      │          absl_random_internal_generate_real.pc
+│      │          absl_random_internal_iostream_state_saver.pc
+│      │          absl_random_internal_mock_helpers.pc
+│      │          absl_random_internal_nonsecure_base.pc
+│      │          absl_random_internal_pcg_engine.pc
+│      │          absl_random_internal_platform.pc
+│      │          absl_random_internal_randen.pc
+│      │          absl_random_internal_randen_engine.pc
+│      │          absl_random_internal_randen_hwaes.pc
+│      │          absl_random_internal_randen_hwaes_impl.pc
+│      │          absl_random_internal_randen_slow.pc
+│      │          absl_random_internal_salted_seed_seq.pc
+│      │          absl_random_internal_seed_material.pc
+│      │          absl_random_internal_traits.pc
+│      │          absl_random_internal_uniform_helper.pc
+│      │          absl_random_internal_wide_multiply.pc
+│      │          absl_random_random.pc
+│      │          absl_random_seed_gen_exception.pc
+│      │          absl_random_seed_sequences.pc
+│      │          absl_raw_hash_map.pc
+│      │          absl_raw_hash_set.pc
+│      │          absl_raw_hash_set_resize_impl.pc
+│      │          absl_raw_logging_internal.pc
+│      │          absl_sample_recorder.pc
+│      │          absl_scoped_set_env.pc
+│      │          absl_span.pc
+│      │          absl_spinlock_wait.pc
+│      │          absl_stacktrace.pc
+│      │          absl_status.pc
+│      │          absl_statusor.pc
+│      │          absl_strerror.pc
+│      │          absl_strings.pc
+│      │          absl_strings_internal.pc
+│      │          absl_string_view.pc
+│      │          absl_str_format.pc
+│      │          absl_str_format_internal.pc
+│      │          absl_symbolize.pc
+│      │          absl_synchronization.pc
+│      │          absl_throw_delegate.pc
+│      │          absl_time.pc
+│      │          absl_time_zone.pc
+│      │          absl_tracing_internal.pc
+│      │          absl_type_traits.pc
+│      │          absl_utf8_for_code_point.pc
+│      │          absl_utility.pc
+│      │          absl_variant.pc
+│      │          absl_vlog_config_internal.pc
+│      │          absl_vlog_is_on.pc
+│      │          absl_weakly_mixed_integer.pc
+│      │          protobuf-lite.pc
+│      │          protobuf.pc
+│      │          upb.pc
+│      │          utf8_range.pc
+│      │          
+│      └─Release
 ├─obj
 │  └─protobuffer
-│      └─Debug x64
+│      ├─Debug x64
+│      │  │  filter_data.pb.obj
+│      │  │  pch.obj
+│      │  │  person.pb.obj
+│      │  │  protobufferD.exe.recipe
+│      │  │  protobufferD.pch
+│      │  │  ReceiverDlg.obj
+│      │  │  SendDlg.obj
+│      │  │  TestMFC.log
+│      │  │  TestMFC.obj
+│      │  │  TestMFC.res
+│      │  │  TestMFC.vcxproj.FileListAbsolute.txt
+│      │  │  vc142.idb
+│      │  │  vc142.pdb
+│      │  │  vcpkg.applocal.log
+│      │  │  
+│      │  └─protobuffer.tlog
+│      │          CL.command.1.tlog
+│      │          CL.read.1.tlog
+│      │          CL.write.1.tlog
+│      │          link-cvtres.read.1.tlog
+│      │          link-cvtres.write.1.tlog
+│      │          link-mt.read.1.tlog
+│      │          link-mt.write.1.tlog
+│      │          link-rc.read.1.tlog
+│      │          link-rc.write.1.tlog
+│      │          link.7532-cvtres.read.1.tlog
+│      │          link.7532-cvtres.write.1.tlog
+│      │          link.7532-mt.read.1.tlog
+│      │          link.7532-mt.write.1.tlog
+│      │          link.7532-rc.read.1.tlog
+│      │          link.7532-rc.write.1.tlog
+│      │          link.7532.read.1.tlog
+│      │          link.7532.write.1.tlog
+│      │          link.command.1.tlog
+│      │          link.read.1.tlog
+│      │          link.write.1.tlog
+│      │          protobuffer.lastbuildstate
+│      │          protobuffer.write.1u.tlog
+│      │          rc.command.1.tlog
+│      │          rc.read.1.tlog
+│      │          rc.write.1.tlog
+│      │          unsuccessfulbuild
+│      │          
+│      └─Release x64
 │          │  filter_data.pb.obj
 │          │  pch.obj
 │          │  person.pb.obj
-│          │  protobufferD.exe.recipe
-│          │  protobufferD.ilk
-│          │  protobufferD.pch
+│          │  protobuffer.exe.recipe
+│          │  protobuffer.iobj
+│          │  protobuffer.ipdb
+│          │  protobuffer.pch
+│          │  ReceiverDlg.obj
+│          │  SendDlg.obj
 │          │  TestMFC.log
 │          │  TestMFC.obj
 │          │  TestMFC.res
 │          │  TestMFC.vcxproj.FileListAbsolute.txt
-│          │  TestMFCDlg.obj
-│          │  vc142.idb
 │          │  vc142.pdb
 │          │  vcpkg.applocal.log
 │          │  
@@ -47,6 +1006,7 @@ C:.
 │                  rc.write.1.tlog
 │                  
 ├─TestMFC
+│  │  CopyDataDefs.h
 │  │  filter_data.pb.cc
 │  │  filter_data.pb.h
 │  │  filter_data.proto
@@ -56,7 +1016,11 @@ C:.
 │  │  person.pb.cc
 │  │  person.pb.h
 │  │  person.proto
+│  │  ReceiverDlg.cpp
+│  │  ReceiverDlg.h
 │  │  resource.h
+│  │  SendDlg.cpp
+│  │  SendDlg.h
 │  │  targetver.h
 │  │  TestMFC.cpp
 │  │  TestMFC.h
@@ -65,7 +1029,6 @@ C:.
 │  │  TestMFC.vcxproj.filters
 │  │  TestMFC.vcxproj.user
 │  │  TestMFCDlg.cpp
-│  │  TestMFCDlg.h
 │  │  
 │  └─res
 │          TestMFC.ico
@@ -75,7 +1038,22 @@ C:.
 │      protobufferMFC.sln
 │      
 └─참고자료
-        명령어 히스토리.md
-        클로드 작업 지시 프롬프트.md
-        프로토 버퍼 준비.md
-        
+    │  간략한 pb cc ,h 생성법.md
+    │  명령어 히스토리.md
+    │  프로토 버퍼 준비.md
+    │  프로토 생성.bat
+    │  
+    ├─작업지시
+    │      work 1.md
+    │      work 2.md
+    │      work 3.md
+    │      work 4.md
+    │      work 5.md
+    │      work 6.md
+    │      work 7.md
+    │      work 8.md
+    │      work 9.md
+    │      
+    └─커밋로그
+            commit log.md
+            
