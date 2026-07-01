@@ -716,3 +716,42 @@ void CParentDlg::OnBnClickedBtnQuickFilter()
     }
 }
 ```
+
+---
+
+## [fix] vcpkg 종속 제거 - protobuf/abseil 링커 설정 로컬화
+
+### 수정 파일
+- `TestMFC/TestMFC.vcxproj`
+- `lib64/protobuf/Release/` (신규 — vcpkg x64-windows Release lib 파일 29개 추가)
+
+### 변경 배경
+vcpkg 의존성을 없애고 protobuf 관련 include / lib / dll을 프로젝트 내부에 심는 작업.
+include 는 이미 정리되어 있었으나, lib/dll 이동 후 아래 두 원인으로 빌드 오류 발생:
+
+| 오류 유형 | 원인 |
+|---|---|
+| `__imp_?combine@MixingHashState...` (LNK2019) | `abseil_dll.lib` 미링크 |
+| `?Flush@LogMessage...` (LNK2019) | `ABSL_CONSUMING_DLL` 미정의 → 헤더가 dllimport 없이 선언되어 import lib 심볼(`__imp_xxx`)과 불일치 |
+
+abseil을 DLL로 빌드한 vcpkg 패키지는 `abseil_dll.dll` 하나에 대부분의 심볼을 번들.
+소비자 쪽에서 `ABSL_CONSUMING_DLL`을 정의해야 abseil 헤더가 `__declspec(dllimport)` 를 붙여
+import lib 항목과 매칭됨.
+
+### 수정 내용 (TestMFC.vcxproj)
+
+#### Debug|x64
+| 항목 | 변경 |
+|---|---|
+| `PreprocessorDefinitions` | `ABSL_CONSUMING_DLL` 추가 |
+| `AdditionalDependencies` | `abseil_dll.lib;utf8_range.lib;utf8_validity.lib` 추가 |
+
+#### Release|x64
+| 항목 | 변경 |
+|---|---|
+| `PreprocessorDefinitions` | `ABSL_CONSUMING_DLL` 추가 |
+| `AdditionalLibraryDirectories` | `C:\Users\USER\Desktop\Github_clone\vcpkg download\...` (타 PC 하드코딩 절대경로) → `../lib64/protobuf/Release` 교체 |
+| `AdditionalDependencies` | `abseil_dll.lib;utf8_range.lib;utf8_validity.lib` 추가 |
+
+### 파일 복사
+`vcpkg\installed\x64-windows\lib\` → `lib64\protobuf\Release\` (abseil_dll.lib 포함 29개)
