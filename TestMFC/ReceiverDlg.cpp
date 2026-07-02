@@ -3,10 +3,10 @@
 #include "TestMFC.h"
 #include "ReceiverDlg.h"
 #include "afxdialogex.h"
-#include "person.pb.h"
-#include "filter_data.pb.h"
 #include "CopyDataDefs.h"
 
+#include "protobuf/filter_data.pb.h"
+#include "protobuf/person.pb.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -4,13 +4,13 @@
 #include "TestMFC.h"
 #include "SendDlg.h"
 #include "afxdialogex.h"
-#include "person.pb.h"
-#include "filter_data.pb.h"
 #include "ReceiverDlg.h"
 #include "CopyDataDefs.h"
 #include <fstream>
 
 
+#include "protobuf/person.pb.h"
+#include "protobuf/filter_data.pb.h"
 
 
 

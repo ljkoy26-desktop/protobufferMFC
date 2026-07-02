@@ -1,8 +1,11 @@
-2TB_Nvme2 볼륨에 대한 폴더 경로의 목록입니다.
-볼륨 일련 번호가 00000097 6657:F8FC입니다.
-H:.
+폴더 PATH의 목록입니다.
+볼륨 일련 번호는 ECE3-C6D1입니다.
+C:.
 │  .gitignore
+│  bin.zip
 │  filelist.txt
+│  include.zip
+│  lib64.zip
 │  make_tree.bat
 │  
 ├─.claude
@@ -18,11 +21,17 @@ H:.
 │  │      libprotobufd.pdb
 │  │      libprotocd.dll
 │  │      libprotocd.pdb
+│  │      protobufferD.exe
 │  │      protobufferD.pdb
 │  │      
 │  └─Release x64
 │          abseil_dll.dll
+│          libprotobuf-lite.dll
+│          libprotobuf-lite.pdb
 │          libprotobuf.dll
+│          libprotobuf.pdb
+│          libprotoc.dll
+│          libprotoc.pdb
 │          protobuffer.exe
 │          protobuffer.pdb
 │          
@@ -510,6 +519,7 @@ H:.
 │          │  arena_align.h
 │          │  arena_allocation_policy.h
 │          │  arena_cleanup.h
+│          │  arena_impl.h
 │          │  cpp_edition_defaults.h
 │          │  cpp_features.pb.h
 │          │  cpp_features.proto
@@ -537,6 +547,7 @@ H:.
 │          │  generated_enum_util.h
 │          │  generated_message_bases.h
 │          │  generated_message_reflection.h
+│          │  generated_message_table_driven.h
 │          │  generated_message_tctable_decl.h
 │          │  generated_message_tctable_gen.h
 │          │  generated_message_tctable_impl.h
@@ -548,7 +559,9 @@ H:.
 │          │  internal_visibility.h
 │          │  map.h
 │          │  map_entry.h
+│          │  map_entry_lite.h
 │          │  map_field.h
+│          │  map_field_inl.h
 │          │  map_field_lite.h
 │          │  map_type_handler.h
 │          │  message.h
@@ -609,6 +622,7 @@ H:.
 │          │  │  zip_writer.h
 │          │  │  
 │          │  ├─cpp
+│          │  │      cpp_generator.h
 │          │  │      generator.h
 │          │  │      helpers.h
 │          │  │      names.h
@@ -616,6 +630,7 @@ H:.
 │          │  │      
 │          │  ├─csharp
 │          │  │      csharp_generator.h
+│          │  │      csharp_names.h
 │          │  │      names.h
 │          │  │      
 │          │  ├─java
@@ -623,10 +638,16 @@ H:.
 │          │  │      generator.h
 │          │  │      helpers.h
 │          │  │      java_features.pb.h
+│          │  │      java_generator.h
+│          │  │      java_names.h
 │          │  │      names.h
 │          │  │      names_internal.h
 │          │  │      name_resolver.h
 │          │  │      options.h
+│          │  │      
+│          │  ├─js
+│          │  │      js_generator.h
+│          │  │      well_known_types_embed.h
 │          │  │      
 │          │  ├─kotlin
 │          │  │      generator.h
@@ -636,6 +657,8 @@ H:.
 │          │  │      line_consumer.h
 │          │  │      names.h
 │          │  │      nsobject_methods.h
+│          │  │      objectivec_generator.h
+│          │  │      objectivec_helpers.h
 │          │  │      
 │          │  ├─php
 │          │  │      names.h
@@ -644,6 +667,7 @@ H:.
 │          │  ├─python
 │          │  │      generator.h
 │          │  │      pyi_generator.h
+│          │  │      python_generator.h
 │          │  │      
 │          │  └─ruby
 │          │          ruby_generator.h
@@ -676,11 +700,25 @@ H:.
 │          │          zero_copy_buffered_stream.h
 │          │          
 │          ├─stubs
+│          │      bytestream.h
 │          │      callback.h
+│          │      casts.h
 │          │      common.h
+│          │      fastmem.h
+│          │      hash.h
+│          │      logging.h
+│          │      macros.h
+│          │      map_util.h
+│          │      mutex.h
+│          │      once.h
 │          │      platform_macros.h
 │          │      port.h
+│          │      status.h
 │          │      status_macros.h
+│          │      stl_util.h
+│          │      stringpiece.h
+│          │      strutil.h
+│          │      template_util.h
 │          │      
 │          └─util
 │                  delimited_message_util.h
@@ -929,42 +967,250 @@ H:.
 │      │          utf8_range.pc
 │      │          
 │      └─Release
+│          │  abseil_dll.lib
+│          │  absl_decode_rust_punycode.lib
+│          │  absl_demangle_rust.lib
+│          │  absl_flags_commandlineflag.lib
+│          │  absl_flags_commandlineflag_internal.lib
+│          │  absl_flags_config.lib
+│          │  absl_flags_internal.lib
+│          │  absl_flags_marshalling.lib
+│          │  absl_flags_parse.lib
+│          │  absl_flags_private_handle_accessor.lib
+│          │  absl_flags_program_name.lib
+│          │  absl_flags_reflection.lib
+│          │  absl_flags_usage.lib
+│          │  absl_flags_usage_internal.lib
+│          │  absl_hashtable_profiler.lib
+│          │  absl_log_flags.lib
+│          │  absl_log_internal_structured_proto.lib
+│          │  absl_poison.lib
+│          │  absl_profile_builder.lib
+│          │  absl_random_internal_entropy_pool.lib
+│          │  absl_tracing_internal.lib
+│          │  absl_utf8_for_code_point.lib
+│          │  libprotobuf-lite.lib
+│          │  libprotobuf.lib
+│          │  libprotoc.lib
+│          │  libupb.lib
+│          │  utf8_range.lib
+│          │  utf8_validity.lib
+│          │  
+│          └─pkgconfig
+│                  abseil_dll.pc
+│                  absl_absl_check.pc
+│                  absl_absl_log.pc
+│                  absl_absl_vlog_is_on.pc
+│                  absl_algorithm.pc
+│                  absl_algorithm_container.pc
+│                  absl_any.pc
+│                  absl_any_invocable.pc
+│                  absl_atomic_hook.pc
+│                  absl_bad_any_cast.pc
+│                  absl_bad_optional_access.pc
+│                  absl_bad_variant_access.pc
+│                  absl_base.pc
+│                  absl_base_internal.pc
+│                  absl_bind_front.pc
+│                  absl_bits.pc
+│                  absl_bounded_utf8_length_sequence.pc
+│                  absl_btree.pc
+│                  absl_charset.pc
+│                  absl_check.pc
+│                  absl_city.pc
+│                  absl_civil_time.pc
+│                  absl_cleanup.pc
+│                  absl_cleanup_internal.pc
+│                  absl_common_policy_traits.pc
+│                  absl_compare.pc
+│                  absl_compressed_tuple.pc
+│                  absl_config.pc
+│                  absl_container_common.pc
+│                  absl_container_memory.pc
+│                  absl_cord.pc
+│                  absl_cordz_functions.pc
+│                  absl_cordz_handle.pc
+│                  absl_cordz_info.pc
+│                  absl_cordz_sample_token.pc
+│                  absl_cordz_statistics.pc
+│                  absl_cordz_update_scope.pc
+│                  absl_cordz_update_tracker.pc
+│                  absl_cord_internal.pc
+│                  absl_core_headers.pc
+│                  absl_crc32c.pc
+│                  absl_crc_cord_state.pc
+│                  absl_crc_cpu_detect.pc
+│                  absl_crc_internal.pc
+│                  absl_debugging.pc
+│                  absl_debugging_internal.pc
+│                  absl_decode_rust_punycode.pc
+│                  absl_demangle_internal.pc
+│                  absl_demangle_rust.pc
+│                  absl_die_if_null.pc
+│                  absl_dynamic_annotations.pc
+│                  absl_endian.pc
+│                  absl_errno_saver.pc
+│                  absl_examine_stack.pc
+│                  absl_exponential_biased.pc
+│                  absl_failure_signal_handler.pc
+│                  absl_fast_type_id.pc
+│                  absl_fixed_array.pc
+│                  absl_flags.pc
+│                  absl_flags_commandlineflag.pc
+│                  absl_flags_commandlineflag_internal.pc
+│                  absl_flags_config.pc
+│                  absl_flags_internal.pc
+│                  absl_flags_marshalling.pc
+│                  absl_flags_parse.pc
+│                  absl_flags_path_util.pc
+│                  absl_flags_private_handle_accessor.pc
+│                  absl_flags_program_name.pc
+│                  absl_flags_reflection.pc
+│                  absl_flags_usage.pc
+│                  absl_flags_usage_internal.pc
+│                  absl_flat_hash_map.pc
+│                  absl_flat_hash_set.pc
+│                  absl_function_ref.pc
+│                  absl_graphcycles_internal.pc
+│                  absl_hash.pc
+│                  absl_hashtablez_sampler.pc
+│                  absl_hashtable_control_bytes.pc
+│                  absl_hashtable_debug.pc
+│                  absl_hashtable_debug_hooks.pc
+│                  absl_hashtable_profiler.pc
+│                  absl_hash_container_defaults.pc
+│                  absl_hash_function_defaults.pc
+│                  absl_hash_policy_traits.pc
+│                  absl_has_ostream_operator.pc
+│                  absl_inlined_vector.pc
+│                  absl_inlined_vector_internal.pc
+│                  absl_int128.pc
+│                  absl_iterator_traits_internal.pc
+│                  absl_iterator_traits_test_helper_internal.pc
+│                  absl_kernel_timeout_internal.pc
+│                  absl_layout.pc
+│                  absl_leak_check.pc
+│                  absl_log.pc
+│                  absl_log_entry.pc
+│                  absl_log_flags.pc
+│                  absl_log_globals.pc
+│                  absl_log_initialize.pc
+│                  absl_log_internal_append_truncated.pc
+│                  absl_log_internal_check_impl.pc
+│                  absl_log_internal_check_op.pc
+│                  absl_log_internal_conditions.pc
+│                  absl_log_internal_config.pc
+│                  absl_log_internal_flags.pc
+│                  absl_log_internal_fnmatch.pc
+│                  absl_log_internal_format.pc
+│                  absl_log_internal_globals.pc
+│                  absl_log_internal_log_impl.pc
+│                  absl_log_internal_log_sink_set.pc
+│                  absl_log_internal_message.pc
+│                  absl_log_internal_nullguard.pc
+│                  absl_log_internal_nullstream.pc
+│                  absl_log_internal_proto.pc
+│                  absl_log_internal_strip.pc
+│                  absl_log_internal_structured.pc
+│                  absl_log_internal_structured_proto.pc
+│                  absl_log_internal_voidify.pc
+│                  absl_log_severity.pc
+│                  absl_log_sink.pc
+│                  absl_log_sink_registry.pc
+│                  absl_log_streamer.pc
+│                  absl_log_structured.pc
+│                  absl_malloc_internal.pc
+│                  absl_memory.pc
+│                  absl_meta.pc
+│                  absl_node_hash_map.pc
+│                  absl_node_hash_set.pc
+│                  absl_node_slot_policy.pc
+│                  absl_non_temporal_arm_intrinsics.pc
+│                  absl_non_temporal_memcpy.pc
+│                  absl_no_destructor.pc
+│                  absl_nullability.pc
+│                  absl_numeric.pc
+│                  absl_numeric_representation.pc
+│                  absl_optional.pc
+│                  absl_overload.pc
+│                  absl_periodic_sampler.pc
+│                  absl_poison.pc
+│                  absl_prefetch.pc
+│                  absl_pretty_function.pc
+│                  absl_profile_builder.pc
+│                  absl_random_bit_gen_ref.pc
+│                  absl_random_distributions.pc
+│                  absl_random_internal_distribution_caller.pc
+│                  absl_random_internal_distribution_test_util.pc
+│                  absl_random_internal_entropy_pool.pc
+│                  absl_random_internal_fastmath.pc
+│                  absl_random_internal_fast_uniform_bits.pc
+│                  absl_random_internal_generate_real.pc
+│                  absl_random_internal_iostream_state_saver.pc
+│                  absl_random_internal_mock_helpers.pc
+│                  absl_random_internal_nonsecure_base.pc
+│                  absl_random_internal_pcg_engine.pc
+│                  absl_random_internal_platform.pc
+│                  absl_random_internal_randen.pc
+│                  absl_random_internal_randen_engine.pc
+│                  absl_random_internal_randen_hwaes.pc
+│                  absl_random_internal_randen_hwaes_impl.pc
+│                  absl_random_internal_randen_slow.pc
+│                  absl_random_internal_salted_seed_seq.pc
+│                  absl_random_internal_seed_material.pc
+│                  absl_random_internal_traits.pc
+│                  absl_random_internal_uniform_helper.pc
+│                  absl_random_internal_wide_multiply.pc
+│                  absl_random_random.pc
+│                  absl_random_seed_gen_exception.pc
+│                  absl_random_seed_sequences.pc
+│                  absl_raw_hash_map.pc
+│                  absl_raw_hash_set.pc
+│                  absl_raw_hash_set_resize_impl.pc
+│                  absl_raw_logging_internal.pc
+│                  absl_sample_recorder.pc
+│                  absl_scoped_set_env.pc
+│                  absl_span.pc
+│                  absl_spinlock_wait.pc
+│                  absl_stacktrace.pc
+│                  absl_status.pc
+│                  absl_statusor.pc
+│                  absl_strerror.pc
+│                  absl_strings.pc
+│                  absl_strings_internal.pc
+│                  absl_string_view.pc
+│                  absl_str_format.pc
+│                  absl_str_format_internal.pc
+│                  absl_symbolize.pc
+│                  absl_synchronization.pc
+│                  absl_throw_delegate.pc
+│                  absl_time.pc
+│                  absl_time_zone.pc
+│                  absl_tracing_internal.pc
+│                  absl_type_traits.pc
+│                  absl_utf8_for_code_point.pc
+│                  absl_utility.pc
+│                  absl_variant.pc
+│                  absl_vlog_config_internal.pc
+│                  absl_vlog_is_on.pc
+│                  absl_weakly_mixed_integer.pc
+│                  protobuf-lite.pc
+│                  protobuf.pc
+│                  upb.pc
+│                  utf8_range.pc
+│                  
 ├─obj
 │  └─protobuffer
 │      ├─Debug x64
-│      │  │  filter_data.pb.obj
-│      │  │  pch.obj
-│      │  │  person.pb.obj
 │      │  │  protobufferD.exe.recipe
-│      │  │  protobufferD.pch
-│      │  │  ReceiverDlg.obj
-│      │  │  SendDlg.obj
 │      │  │  TestMFC.log
-│      │  │  TestMFC.obj
-│      │  │  TestMFC.res
 │      │  │  TestMFC.vcxproj.FileListAbsolute.txt
-│      │  │  vc142.idb
-│      │  │  vc142.pdb
 │      │  │  vcpkg.applocal.log
 │      │  │  
 │      │  └─protobuffer.tlog
 │      │          CL.command.1.tlog
 │      │          CL.read.1.tlog
 │      │          CL.write.1.tlog
-│      │          link-cvtres.read.1.tlog
-│      │          link-cvtres.write.1.tlog
-│      │          link-mt.read.1.tlog
-│      │          link-mt.write.1.tlog
-│      │          link-rc.read.1.tlog
-│      │          link-rc.write.1.tlog
-│      │          link.7532-cvtres.read.1.tlog
-│      │          link.7532-cvtres.write.1.tlog
-│      │          link.7532-mt.read.1.tlog
-│      │          link.7532-mt.write.1.tlog
-│      │          link.7532-rc.read.1.tlog
-│      │          link.7532-rc.write.1.tlog
-│      │          link.7532.read.1.tlog
-│      │          link.7532.write.1.tlog
 │      │          link.command.1.tlog
 │      │          link.read.1.tlog
 │      │          link.write.1.tlog
@@ -973,7 +1219,6 @@ H:.
 │      │          rc.command.1.tlog
 │      │          rc.read.1.tlog
 │      │          rc.write.1.tlog
-│      │          unsuccessfulbuild
 │      │          
 │      └─Release x64
 │          │  filter_data.pb.obj
@@ -1007,21 +1252,16 @@ H:.
 │                  
 ├─TestMFC
 │  │  CopyDataDefs.h
-│  │  filter_data.pb.cc
-│  │  filter_data.pb.h
-│  │  filter_data.proto
 │  │  framework.h
 │  │  pch.cpp
 │  │  pch.h
-│  │  person.pb.cc
-│  │  person.pb.h
-│  │  person.proto
 │  │  ReceiverDlg.cpp
 │  │  ReceiverDlg.h
 │  │  resource.h
 │  │  SendDlg.cpp
 │  │  SendDlg.h
 │  │  targetver.h
+│  │  TestMFC.aps
 │  │  TestMFC.cpp
 │  │  TestMFC.h
 │  │  TestMFC.rc
@@ -1030,9 +1270,23 @@ H:.
 │  │  TestMFC.vcxproj.user
 │  │  TestMFCDlg.cpp
 │  │  
+│  ├─protobuf
+│  │      filter_data.pb.cc
+│  │      filter_data.pb.h
+│  │      filter_data.proto
+│  │      person.pb.cc
+│  │      person.pb.h
+│  │      person.proto
+│  │      
 │  └─res
 │          TestMFC.ico
 │          TestMFC.rc2
+│          
+├─tools
+│  └─protobuf
+│          libprotobuf.dll
+│          libprotoc.dll
+│          protoc.exe
 │          
 ├─workspace
 │      protobufferMFC.sln
@@ -1043,6 +1297,10 @@ H:.
     │  프로토 버퍼 준비.md
     │  프로토 생성.bat
     │  
+    ├─3.12 설치
+    │      vcpkg.json
+    │      프로토 버퍼 312 설치.md
+    │      
     ├─작업지시
     │      work 1.md
     │      work 2.md

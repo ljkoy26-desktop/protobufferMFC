@@ -36,17 +36,17 @@
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="person.pb.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="filter_data.pb.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CopyDataDefs.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="ReceiverDlg.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="protobuf\filter_data.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="protobuf\person.pb.h">
+      <Filter>proto</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,14 +59,14 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="person.pb.cc">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="filter_data.pb.cc">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ReceiverDlg.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="protobuf\filter_data.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="protobuf\person.pb.cc">
+      <Filter>proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,10 +78,10 @@
     <None Include="res\TestMFC.rc2">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="filter_data.proto">
+    <None Include="protobuf\filter_data.proto">
       <Filter>proto</Filter>
     </None>
-    <None Include="person.proto">
+    <None Include="protobuf\person.proto">
       <Filter>proto</Filter>
     </None>
   </ItemGroup>
