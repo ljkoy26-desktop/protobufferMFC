@@ -1,0 +1,14 @@
+{
+  "name": "protobuf-old-version",
+  "version": "1.0.0",
+  "dependencies": [
+    "protobuf"
+  ],
+  "overrides": [
+    {
+      "name": "protobuf",
+      "version": "3.12.3"
+    }
+  ],
+  "builtin-baseline": "0ca64b4e1c70fa6d9f53b369b8f3f0843797c20c"
+}
