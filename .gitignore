@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Include
+/bin
+/lib64
+/참고자료/작업지시
